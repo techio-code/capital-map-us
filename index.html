@@ -765,6 +765,88 @@
       #search-wrap { display: none; }
       #node-type-legend { display: none; }
     }
+
+    /* ===== BY SECTOR / TABLE / ABOUT VIEWS ===== */
+    #view-sector,#view-table,#view-about{display:none;flex:1;}
+    #view-sector{overflow-y:auto;padding:var(--sp-lg);background:var(--night);}
+    #view-sector::-webkit-scrollbar,#view-table .table-wrap::-webkit-scrollbar,#view-about::-webkit-scrollbar{width:4px;}
+    #view-sector::-webkit-scrollbar-thumb,#view-table .table-wrap::-webkit-scrollbar-thumb,#view-about::-webkit-scrollbar-thumb{background:var(--ink-4);border-radius:2px;}
+    .sector-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:var(--sp-md);max-width:1280px;margin:0 auto;}
+    .sector-card{background:var(--panel);border:1px solid var(--border-dim);border-radius:6px;padding:var(--sp-md);cursor:pointer;transition:border-color .15s,background .15s;}
+    .sector-card:hover{border-color:var(--border);background:var(--panel-2);}
+    .sector-card-header{display:flex;align-items:center;gap:var(--sp-sm);margin-bottom:var(--sp-md);}
+    .sector-card-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;}
+    .sector-card-name{font-size:13px;font-weight:700;color:var(--ink-1);flex:1;}
+    .sector-card-count{font-family:var(--font-mono);font-size:11px;color:var(--ink-3);}
+    .sector-card-stats{display:flex;gap:var(--sp-lg);margin-bottom:var(--sp-md);padding-bottom:var(--sp-sm);border-bottom:1px solid var(--border-dim);}
+    .sector-stat{display:flex;flex-direction:column;gap:2px;}
+    .sector-stat-val{font-size:18px;font-weight:700;color:var(--gold);font-family:var(--font-mono);letter-spacing:-.02em;}
+    .sector-stat-label{font-size:9px;font-family:var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-4);}
+    .sector-top5-label{font-family:var(--font-mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-4);margin-bottom:var(--sp-xs);}
+    .sector-top5-item{display:flex;align-items:center;gap:var(--sp-sm);padding:3px 0;}
+    .sector-top5-rank{font-family:var(--font-mono);font-size:9px;color:var(--ink-4);width:14px;text-align:right;flex-shrink:0;}
+    .sector-top5-ticker{font-family:var(--font-mono);font-size:10px;color:var(--gold);width:52px;flex-shrink:0;}
+    .sector-top5-name{font-size:11px;color:var(--ink-2);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+    .sector-top5-subs{font-family:var(--font-mono);font-size:10px;color:var(--ink-3);flex-shrink:0;}
+    .sector-hint{font-family:var(--font-mono);font-size:9px;color:var(--ink-4);letter-spacing:.08em;margin-top:var(--sp-sm);text-align:right;}
+    #view-table{overflow:hidden;background:var(--night);flex-direction:column;}
+    .table-toolbar{display:flex;align-items:center;gap:var(--sp-md);padding:var(--sp-sm) var(--sp-lg);background:var(--night-2);border-bottom:1px solid var(--border-dim);flex-shrink:0;}
+    .table-search{width:240px;height:30px;background:var(--night-3);border:1px solid var(--border-dim);border-radius:var(--radius);padding:0 var(--sp-sm);color:var(--ink-1);font-family:var(--font-mono);font-size:11px;outline:none;transition:border-color .15s;}
+    .table-search:focus{border-color:var(--border);}
+    .table-search::placeholder{color:var(--ink-4);}
+    .table-count{font-family:var(--font-mono);font-size:10px;color:var(--ink-4);letter-spacing:.08em;}
+    .table-pager{display:flex;align-items:center;gap:var(--sp-sm);margin-left:auto;}
+    .pager-btn{height:28px;padding:0 var(--sp-sm);background:var(--night-3);border:1px solid var(--border-dim);border-radius:var(--radius);color:var(--ink-2);font-family:var(--font-mono);font-size:10px;cursor:pointer;transition:all .15s;}
+    .pager-btn:hover:not(:disabled){border-color:var(--border);color:var(--gold);}
+    .pager-btn:disabled{opacity:.3;cursor:default;}
+    .pager-info{font-family:var(--font-mono);font-size:10px;color:var(--ink-3);min-width:80px;text-align:center;}
+    .table-wrap{flex:1;overflow-y:auto;overflow-x:auto;}
+    .table-wrap::-webkit-scrollbar{height:4px;}
+    table.data-table{width:100%;border-collapse:collapse;min-width:700px;}
+    .data-table thead{background:var(--night-2);position:sticky;top:0;z-index:10;}
+    .data-table th{padding:var(--sp-sm) var(--sp-md);text-align:left;font-family:var(--font-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);border-bottom:1px solid var(--border-dim);white-space:nowrap;cursor:pointer;user-select:none;transition:color .15s;}
+    .data-table th:hover{color:var(--ink-1);}
+    .data-table th.sort-asc::after{content:' \2191';color:var(--gold);}
+    .data-table th.sort-desc::after{content:' \2193';color:var(--gold);}
+    .data-table td{padding:var(--sp-xs) var(--sp-md);border-bottom:1px solid rgba(255,255,255,.04);font-size:12px;color:var(--ink-2);white-space:nowrap;}
+    .data-table tbody tr{transition:background .1s;cursor:pointer;}
+    .data-table tbody tr:hover{background:var(--night-3);}
+    .td-rank{font-family:var(--font-mono);font-size:10px;color:var(--ink-4);width:40px;text-align:right;}
+    .td-ticker{font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--gold);width:70px;}
+    .td-sector-dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:5px;vertical-align:middle;}
+    .td-subs{font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--ink-1);text-align:right;width:60px;}
+    .td-examples{font-size:11px;color:var(--ink-4);max-width:300px;overflow:hidden;text-overflow:ellipsis;}
+    #view-about{overflow-y:auto;background:var(--night);padding:var(--sp-xl) var(--sp-lg);align-items:flex-start;justify-content:center;}
+    .about-inner{max-width:720px;width:100%;margin:0 auto;}
+    .about-hero-eyebrow{font-family:var(--font-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:var(--sp-sm);}
+    .about-hero-title{font-size:28px;font-weight:700;color:var(--ink-1);letter-spacing:-.02em;line-height:1.2;margin-bottom:var(--sp-md);}
+    .about-hero-desc{font-size:14px;color:var(--ink-2);line-height:1.7;margin-bottom:var(--sp-xl);}
+    .about-stats-row{display:flex;gap:var(--sp-lg);flex-wrap:wrap;margin-bottom:var(--sp-xl);padding:var(--sp-md);background:var(--night-2);border:1px solid var(--border-dim);border-radius:6px;}
+    .about-stat{display:flex;flex-direction:column;gap:4px;}
+    .about-stat-val{font-size:22px;font-weight:700;color:var(--gold);font-family:var(--font-mono);letter-spacing:-.02em;}
+    .about-stat-label{font-size:10px;font-family:var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-4);}
+    .about-section{margin-bottom:var(--sp-xl);}
+    .about-section-title{font-family:var(--font-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid var(--border-dim);padding-bottom:var(--sp-xs);margin-bottom:var(--sp-md);}
+    .about-section p{font-size:13px;color:var(--ink-2);line-height:1.7;margin-bottom:var(--sp-sm);}
+    .about-limitation-list{list-style:none;padding:0;}
+    .about-limitation-list li{font-size:13px;color:var(--ink-2);line-height:1.7;padding:var(--sp-xs) 0 var(--sp-xs) var(--sp-md);position:relative;}
+    .about-limitation-list li::before{content:'\2014';position:absolute;left:0;color:var(--ink-4);}
+    .about-excluded-tickers{font-family:var(--font-mono);font-size:11px;color:var(--gold);letter-spacing:.06em;}
+    .about-credit-row{display:flex;align-items:center;gap:var(--sp-lg);flex-wrap:wrap;}
+    .about-credit-link{display:inline-flex;align-items:center;gap:5px;font-family:var(--font-mono);font-size:11px;color:var(--ink-3);text-decoration:none;letter-spacing:.06em;transition:color .15s;}
+    .about-credit-link:hover{color:var(--gold);}
+    .about-tag{display:inline-block;font-family:var(--font-mono);font-size:9px;letter-spacing:.1em;color:var(--ink-4);background:var(--night-3);border:1px solid var(--border-dim);border-radius:2px;padding:2px 6px;}
+    @media(max-width:640px){
+      .sector-grid{grid-template-columns:1fr;}
+      #view-sector{padding:var(--sp-sm);}
+      .table-search{width:140px;}
+      .td-examples{display:none;}
+      .data-table{min-width:auto;}
+      .table-toolbar{flex-wrap:wrap;gap:var(--sp-sm);}
+      .about-hero-title{font-size:20px;}
+      .about-stats-row{gap:var(--sp-md);}
+      #view-about{padding:var(--sp-md);}
+    }
   </style>
 </head>
 <body>
@@ -896,6 +978,118 @@
         <div class="loading-status" id="loading-status">Initializing...</div>
       </div>
     </div>
+
+    <!-- BY SECTOR VIEW -->
+    <div id="view-sector">
+      <div class="sector-grid" id="sector-grid"></div>
+    </div>
+
+    <!-- TABLE VIEW -->
+    <div id="view-table">
+      <div class="table-toolbar">
+        <input class="table-search" id="table-search" type="text" placeholder="Search ticker or name..." autocomplete="off" spellcheck="false">
+        <span class="table-count" id="table-count"></span>
+        <div class="table-pager">
+          <button class="pager-btn" id="pager-prev">Prev</button>
+          <span class="pager-info" id="pager-info"></span>
+          <button class="pager-btn" id="pager-next">Next</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table" id="data-table">
+          <thead>
+            <tr>
+              <th class="td-rank" data-col="rank">#</th>
+              <th data-col="ticker">Ticker</th>
+              <th data-col="name">Name</th>
+              <th data-col="sector">Sector</th>
+              <th class="td-subs" data-col="subsidiaries">Subs</th>
+              <th class="td-examples">Top Subsidiaries</th>
+            </tr>
+          </thead>
+          <tbody id="table-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ABOUT VIEW -->
+    <div id="view-about">
+      <div class="about-inner">
+        <div class="about-hero-eyebrow">Team Techio / Capital Map US</div>
+        <div class="about-hero-title">S&amp;P 500 Subsidiary Network</div>
+        <div class="about-hero-desc">
+          Who owns what in corporate America? Capital Map US maps every disclosed subsidiary of
+          every S&amp;P 500 company — parsed directly from SEC EDGAR Exhibit 21 (10-K annual filings).
+          Explore the hidden ownership web across 11 GICS sectors, from mega-conglomerates to lean pure-plays.
+        </div>
+
+        <div class="about-stats-row">
+          <div class="about-stat">
+            <span class="about-stat-val">503</span>
+            <span class="about-stat-label">S&amp;P 500 Parents</span>
+          </div>
+          <div class="about-stat">
+            <span class="about-stat-val">9,690</span>
+            <span class="about-stat-label">Subsidiaries</span>
+          </div>
+          <div class="about-stat">
+            <span class="about-stat-val">9,846</span>
+            <span class="about-stat-label">Relationships</span>
+          </div>
+          <div class="about-stat">
+            <span class="about-stat-val">11</span>
+            <span class="about-stat-label">GICS Sectors</span>
+          </div>
+        </div>
+
+        <div class="about-section">
+          <div class="about-section-title">Data Source</div>
+          <p>
+            All subsidiary data is extracted from <strong style="color:var(--ink-1)">SEC EDGAR Exhibit 21</strong>
+            filings — the legal attachment to each company's 10-K annual report that lists significant subsidiaries
+            and their jurisdictions of incorporation.
+          </p>
+          <p>
+            Updated: <span style="color:var(--ink-1);font-family:var(--font-mono)">2026-06-14</span> &nbsp;|&nbsp;
+            Source: <span style="color:var(--ink-1);font-family:var(--font-mono)">SEC EDGAR / EDGAR Full-Text Search</span>
+          </p>
+        </div>
+
+        <div class="about-section">
+          <div class="about-section-title">How to Use</div>
+          <p><strong style="color:var(--ink-1)">NETWORK</strong> — Force-directed graph showing all 503 parent companies and 9,690 subsidiaries. Click any parent node to highlight its subsidiary network. Use the legend to filter by GICS sector. Scroll to zoom, drag to pan.</p>
+          <p><strong style="color:var(--ink-1)">BY SECTOR</strong> — Cards for all 11 GICS sectors. See parent count, total subsidiaries, and the top 5 companies by subsidiary count per sector. Click a card to switch to the Network view filtered to that sector.</p>
+          <p><strong style="color:var(--ink-1)">TABLE</strong> — Sortable, searchable table of all 503 parent companies. Sort by ticker, name, sector, or subsidiary count. Search by ticker or company name.</p>
+        </div>
+
+        <div class="about-section">
+          <div class="about-section-title">Limitations</div>
+          <ul class="about-limitation-list">
+            <li>6 S&amp;P 500 companies embed Exhibit 21 within the 10-K body rather than as a separate attachment and are excluded from this dataset:
+              <span class="about-excluded-tickers">ANET ERIE FDXF ODFL VRSN VRSK</span></li>
+            <li>Subsidiary data reflects SEC disclosure at the time of each company's most recent 10-K filing. Acquisitions, divestitures, or restructurings after filing are not reflected.</li>
+            <li>Only subsidiaries explicitly listed in Exhibit 21 are included. Minority stakes and joint ventures may be omitted at the company's discretion under SEC rules.</li>
+            <li>Jurisdictions are as disclosed — many filings omit jurisdiction information for individual subsidiaries.</li>
+          </ul>
+        </div>
+
+        <div class="about-section">
+          <div class="about-section-title">Credit</div>
+          <div class="about-credit-row">
+            <a class="about-credit-link" href="https://x.com/techio_code" target="_blank" rel="noopener">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.257 5.628zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              @techio_code
+            </a>
+            <a class="about-credit-link" href="https://github.com/techio-code/capital-map-us" target="_blank" rel="noopener">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+              techio-code/capital-map-us
+            </a>
+            <span class="about-tag">v0.5</span>
+            <span class="about-tag">SEC Exhibit 21</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- LEGEND -->
@@ -926,27 +1120,9 @@
   <div id="test-overlay"></div>
 
   <script>
-  /* ================================================================
-     Capital Map US — D3.js v7 + Canvas Force-directed Graph
-     Target  : 503 nodes (S&P500) + 5,000 dummy edges at 60 fps
-     Sectors : GICS 11 sectors
-     Language: English UI
-     Mode    : Dummy data skeleton
-                Real data → fetch data/companies-us.json + data/relations-us.json
-     Derived from: apps/capital-map/index.html (JP version by Team Techio)
-     Reuse  : ~72% (graph engine / FPS HUD / pan-zoom / click center /
-                     render loop / touch / adjacency / ranking / legend)
-     Changed : sector palette, ticker/name model, search box,
-               en-US strings, node label, data spec comments
-  ================================================================ */
 
   'use strict';
 
-  /* ----------------------------------------------------------------
-     GICS 11 Sector Definitions
-     Colors selected for dark-bg contrast >= 4.5:1 (WCAG AA)
-     Color-blind safe: using shape + label, not color alone
-  ---------------------------------------------------------------- */
   const SECTORS = [
     { id: 0,  key: 'Information Technology',  short: 'IT',       color: '#5B9BD5', count: 72 },
     { id: 1,  key: 'Health Care',             short: 'HC',       color: '#70AD47', count: 59 },
@@ -961,15 +1137,9 @@
     { id: 10, key: 'Materials',               short: 'MAT',      color: '#16A085', count: 26 },
   ];
 
-  /* Build a lookup from sector key string to SECTORS index */
   const SECTOR_KEY_MAP = {};
   SECTORS.forEach(s => { SECTOR_KEY_MAP[s.key] = s.id; });
 
-  /* ----------------------------------------------------------------
-     S&P500 Ticker / Name corpus for dummy generation
-     Sourced from sp500_503_backup_20260610.json (read-only reference)
-     Real integration: fetch data/companies-us.json
-  ---------------------------------------------------------------- */
   const SP500_SAMPLE = [
     { t: 'AAPL', n: 'Apple',             s: 0 },
     { t: 'MSFT', n: 'Microsoft',         s: 0 },
@@ -1084,7 +1254,6 @@
     { t: 'GD',   n: 'General Dynamics',  s: 5 },
   ];
 
-  /* Company name suffixes for filler dummy companies (to reach 503) */
   const TICKER_SUFFIXES = [
     'A','B','C','D','E','F','G','H','I','J','K','L','M',
     'N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
@@ -1105,18 +1274,12 @@
     'ALB','CF','FMC','IP','MOS','PKG','SEE','SON','WRK','EMN',
   ];
 
-  /* ----------------------------------------------------------------
-     CONSTANTS
-  ---------------------------------------------------------------- */
   const NODE_COUNT = 503;
   const EDGE_COUNT = 5000;
   const FPS_WARN   = 30;
 
-  /* ================================================================
-     PURE FUNCTIONS (tested via ?test=1)
-  ================================================================ */
 
-  /** Seeded PRNG (mulberry32) */
+  
   function mulberry32(seed) {
     return function() {
       seed |= 0; seed = seed + 0x6D2B79F5 | 0;
@@ -1126,20 +1289,18 @@
     };
   }
 
-  /** Generate a dummy US ticker symbol */
   function generateTicker(rand, index) {
     if (index < SP500_SAMPLE.length)  return SP500_SAMPLE[index].t;
     if (index < SP500_SAMPLE.length + SECTOR_ABBR_TICKERS.length) {
       return SECTOR_ABBR_TICKERS[index - SP500_SAMPLE.length];
     }
     const base = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const len = Math.floor(rand() * 2) + 2; // 2-3 chars
+    const len = Math.floor(rand() * 2) + 2; 
     let tk = '';
     for (let i = 0; i < len; i++) tk += base[Math.floor(rand() * 26)];
     return tk;
   }
 
-  /** Generate a company name for dummy node */
   function generateCompanyName(rand, index) {
     if (index < SP500_SAMPLE.length) return SP500_SAMPLE[index].n;
     const PREFIXES = [
@@ -1157,11 +1318,10 @@
     return p + ' ' + s;
   }
 
-  /** Pick sector id for dummy node */
   function generateSectorId(rand, index) {
     if (index < SP500_SAMPLE.length) return SP500_SAMPLE[index].s;
-    // Weight by actual S&P500 composition
-    const weights = [72,59,76,48,23,80,36,21,31,31,26]; // sector counts
+    
+    const weights = [72,59,76,48,23,80,36,21,31,31,26]; 
     const total = weights.reduce((a,b)=>a+b,0);
     let r = rand() * total;
     for (let i = 0; i < weights.length; i++) {
@@ -1171,19 +1331,16 @@
     return 0;
   }
 
-  /** Generate dummy market cap in billions USD (log-normal approx) */
   function generateMarketCap(rand) {
-    // $2B - $3000B range, log-normal
+    
     return Math.round(Math.exp(rand() * 6 + 0.7) * 2);
   }
 
-  /** Format market cap for display */
   function formatMarketCap(billionsUsd) {
     if (billionsUsd >= 1000) return '$' + (billionsUsd / 1000).toFixed(1) + 'T';
     return '$' + billionsUsd + 'B';
   }
 
-  /** Initial node position: radial layout */
   function calcInitialPosition(index, total, cx, cy) {
     const rings    = Math.ceil(Math.sqrt(total / Math.PI));
     const ringIdx  = Math.floor(index / (total / rings));
@@ -1195,26 +1352,22 @@
     return { x: cx + ringRad * Math.cos(angle) + jx, y: cy + ringRad * Math.sin(angle) + jy };
   }
 
-  /** Node radius proportional to subsidiary count */
   function calcNodeRadius(subsidiaryCount, maxCount) {
     const base = 3, scale = 9;
     return base + (subsidiaryCount / Math.max(1, maxCount)) * scale;
   }
 
-  /** FPS color class */
   function fpsColorClass(fps) {
     if (fps >= 50) return 'good';
     if (fps >= 30) return 'warn';
     return 'bad';
   }
 
-  /** Squared distance between two points */
   function dist2(ax, ay, bx, by) {
     const dx = ax - bx, dy = ay - by;
     return dx * dx + dy * dy;
   }
 
-  /** Find nearest node within threshold screen pixels */
   function findNearestNode(nodes, sx, sy, transform, threshold) {
     const wx = (sx - transform.x) / transform.k;
     const wy = (sy - transform.y) / transform.k;
@@ -1227,7 +1380,6 @@
     return best;
   }
 
-  /** Build bidirectional adjacency list */
   function buildAdjacency(edges, nodeCount) {
     const adj = new Array(nodeCount).fill(null).map(() => []);
     for (let i = 0; i < edges.length; i++) {
@@ -1238,19 +1390,16 @@
     return adj;
   }
 
-  /** Top N nodes by subsidiary count */
   function topNBySubsidiaries(nodes, n) {
     return [...nodes].sort((a, b) => b.subsidiaryCount - a.subsidiaryCount).slice(0, n);
   }
 
-  /** Sector stats: count nodes per sector */
   function calcSectorStats(nodes) {
     const stats = new Array(SECTORS.length).fill(0);
     for (let i = 0; i < nodes.length; i++) stats[nodes[i].sector]++;
     return stats;
   }
 
-  /** Search nodes by ticker prefix or name substring (case-insensitive) */
   function searchNodes(nodes, query, limit) {
     if (!query || query.length < 1) return [];
     const q = query.toUpperCase();
@@ -1265,11 +1414,6 @@
     return results;
   }
 
-  /* ================================================================
-     DUMMY DATA GENERATION
-     Generates 503 nodes + 5,000 edges with preferential attachment
-     Hub companies (indices 0-30) are more likely to be parents
-  ================================================================ */
   function generateDummyData(rand, nodeCount, edgeCount) {
     const nodes = [];
 
@@ -1281,21 +1425,20 @@
         name:           generateCompanyName(rand, i),
         sector:         sectorId,
         subsidiaryCount: 0,
-        marketCapB:     generateMarketCap(rand), // $B USD
+        marketCapB:     generateMarketCap(rand), 
         x: 0, y: 0,
         vx: 0, vy: 0,
         fx: null, fy: null,
       });
     }
 
-    // Edges: preferential attachment — large companies are hubs
     const edges    = [];
     const usedPairs = new Set();
     let   attempts  = 0;
 
     while (edges.length < edgeCount && attempts < edgeCount * 12) {
       attempts++;
-      // Source: 60% from top 15% (Fortune 500 conglomerates)
+      
       const src = rand() < 0.60
         ? Math.floor(rand() * (nodeCount * 0.15))
         : Math.floor(rand() * nodeCount);
@@ -1313,12 +1456,6 @@
     return { nodes, edges };
   }
 
-  /* ================================================================
-     DATA LOADING
-     Tries to fetch real JSON; falls back to dummy on error.
-     engineer A output: data/companies-us.json
-     engineer B output: data/relations-us.json
-  ================================================================ */
   async function loadData() {
     try {
       const [cResp, rResp] = await Promise.all([
@@ -1330,13 +1467,12 @@
       const cData = await cResp.json();
       const rData = await rResp.json();
 
-      // Transform companies → nodes
       const nodes = cData.companies.map(c => ({
         id:             c.id,
         ticker:         c.ticker || null,
         name:           c.name,
         sector:         SECTOR_KEY_MAP[c.sector] !== undefined ? SECTOR_KEY_MAP[c.sector] : 0,
-        nodeType:       c.node_type || 'parent',   // 'parent' | 'subsidiary'
+        nodeType:       c.node_type || 'parent',   
         subsidiaryCount: 0,
         marketCapB:     c.market_cap_b || 0,
         jurisdiction:   c.jurisdiction || null,
@@ -1345,7 +1481,6 @@
         fx: null, fy: null,
       }));
 
-      // Transform relations → edges (skip any with null child_id)
       const edges = [];
       for (const r of rData.relations) {
         if (r.child_id === null || r.child_id === undefined) continue;
@@ -1358,8 +1493,7 @@
         });
       }
 
-      // Count subsidiaries on parent nodes only
-      // Also record first parent for each subsidiary (for initial position hint)
+      
       edges.forEach(e => {
         const s = nodes[e.source];
         const t = nodes[e.target];
@@ -1371,18 +1505,15 @@
 
       return { nodes, edges, isDummy: false };
     } catch (_) {
-      // Fallback to dummy
+      
       const rand = mulberry32(20260614);
       const { nodes, edges } = generateDummyData(rand, NODE_COUNT, EDGE_COUNT);
       return { nodes, edges, isDummy: true };
     }
   }
 
-  /* ================================================================
-     MAIN APPLICATION
-  ================================================================ */
   (function App() {
-    /* DOM refs */
+    
     const canvas       = document.getElementById('graph-canvas');
     const ctx          = canvas.getContext('2d');
     const canvasWrap   = document.getElementById('canvas-wrap');
@@ -1418,10 +1549,9 @@
     const searchInput   = document.getElementById('search-input');
     const searchResults = document.getElementById('search-results');
 
-    /* State */
     let nodes        = [], edges = [];
-    let parentNodes  = [];   // cached subset — parent nodes only
-    let subNodes     = [];   // cached subset — subsidiary nodes only
+    let parentNodes  = [];   
+    let subNodes     = [];   
     let simulation   = null;
     let transform    = { x: 0, y: 0, k: 1 };
     let isDragging   = false;
@@ -1431,20 +1561,17 @@
     let activeSectors = new Set(SECTORS.map(s => s.id));
     let animFrameId  = null;
 
-    /* FPS tracking */
     let lastFrameTime  = performance.now();
     let fpsFrameCount  = 0;
     let fpsSmoothed    = 60;
     let fpsUpdateTimer = 0;
 
-    /* ---- Canvas resize ---- */
     function resizeCanvas() {
       const rect = canvasWrap.getBoundingClientRect();
       canvas.width  = rect.width;
       canvas.height = rect.height;
     }
 
-    /* ---- Center transform ---- */
     function centerTransform() {
       const w = canvas.width, h = canvas.height;
       transform.x = w / 2;
@@ -1452,15 +1579,11 @@
       transform.k = 0.55;
     }
 
-    /* ================================================================
-       RENDER LOOP
-    ================================================================ */
     function render() {
       const now = performance.now();
       const dt  = now - lastFrameTime;
       lastFrameTime = now;
 
-      // FPS (exponential moving average)
       fpsFrameCount++;
       fpsUpdateTimer += dt;
       if (fpsUpdateTimer > 500) {
@@ -1485,18 +1608,15 @@
       ctx.translate(tx, ty);
       ctx.scale(tk, tk);
 
-      // Viewport culling bounds
       const viewX1 = -tx / tk - 60, viewY1 = -ty / tk - 60;
       const viewX2 = (W - tx) / tk + 60, viewY2 = (H - ty) / tk + 60;
 
-      // Highlight set (selected node's neighbors)
       const highlightSet = new Set();
       if (selectedNode !== null) {
         (selectedNode._adj || []).forEach(id => highlightSet.add(id));
         highlightSet.add(selectedNode.id);
       }
 
-      // ---- Draw edges ----
       ctx.lineWidth = 1 / tk;
       for (let i = 0; i < edges.length; i++) {
         const e = edges[i];
@@ -1528,14 +1648,13 @@
         if (isHighlight) ctx.lineWidth = 1 / tk;
       }
 
-      // ---- Draw nodes ----
-      // Two-pass: subsidiaries first (behind), then parents (on top)
+      
       for (let pass = 0; pass < 2; pass++) {
         for (let i = 0; i < nodes.length; i++) {
           const n = nodes[i];
           const isParent = n.nodeType !== 'subsidiary';
-          if (pass === 0 && isParent)  continue;   // pass 0: subsidiaries only
-          if (pass === 1 && !isParent) continue;   // pass 1: parents only
+          if (pass === 0 && isParent)  continue;   
+          if (pass === 1 && !isParent) continue;   
 
           if (n.x < viewX1 || n.x > viewX2 || n.y < viewY1 || n.y > viewY2) continue;
 
@@ -1550,7 +1669,7 @@
             alpha = isActive ? 1.0 : 0.12;
             if (highlightSet.size > 0 && !isNeighbor) alpha *= 0.1;
           } else {
-            // Subsidiaries: dimmer base alpha, fade further when parent is selected
+            
             alpha = isActive ? 0.38 : 0.06;
             if (highlightSet.size > 0) {
               alpha = isNeighbor ? 0.75 : 0.04;
@@ -1560,7 +1679,6 @@
           const r     = n._radius || (isParent ? 5 : 2);
           const drawR = isHovered ? r * 1.6 : isSelected ? r * 2.0 : r;
 
-          // Glow — parents only
           if (isParent && (isHovered || isSelected) && isActive) {
             ctx.save();
             const grd = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, drawR * 5);
@@ -1590,10 +1708,10 @@
               ctx.fill();
             }
           } else {
-            // Subsidiary: hollow ring with sector tint
+            
             const col = sector.color;
             if (isHovered) {
-              // Filled dot on hover
+              
               ctx.fillStyle = col + 'BB';
               ctx.fill();
             } else {
@@ -1611,7 +1729,6 @@
       animFrameId = requestAnimationFrame(render);
     }
 
-    /* ---- Hover ---- */
     function handleMouseMove(e) {
       const rect = canvas.getBoundingClientRect();
       const sx = e.clientX - rect.left;
@@ -1628,7 +1745,6 @@
         return;
       }
 
-      // Try parent first (larger hit target: 22px), then subsidiary (smaller: 8px)
       let nearest = findNearestNode(parentNodes, sx, sy, transform, 22 / transform.k);
       let isSubHover = false;
       if (!nearest) {
@@ -1665,13 +1781,12 @@
       }
     }
 
-    /* ---- Click: center animation (parents only) ---- */
     function handleClick(e) {
       if (isDragging) return;
       const rect = canvas.getBoundingClientRect();
       const sx = e.clientX - rect.left;
       const sy = e.clientY - rect.top;
-      // Only respond to parent node clicks
+      
       const nearest = findNearestNode(parentNodes, sx, sy, transform, 22 / transform.k);
       if (nearest) {
         selectNode(nearest);
@@ -1729,7 +1844,6 @@
       canvas.classList.remove('dragging');
     }
 
-    /* ---- Zoom ---- */
     function handleWheel(e) {
       e.preventDefault();
       const rect = canvas.getBoundingClientRect();
@@ -1743,7 +1857,6 @@
       hudZoom.textContent = transform.k.toFixed(2) + 'x';
     }
 
-    /* ---- Touch ---- */
     let lastTouchDist = 0;
     function handleTouchStart(e) {
       if (e.touches.length === 2) {
@@ -1786,7 +1899,6 @@
       }
     }
 
-    /* ---- Animated pan ---- */
     function animatePanTo(worldX, worldY, targetK) {
       const W = canvas.width, H = canvas.height;
       const startX = transform.x, startY = transform.y, startK = transform.k;
@@ -1810,7 +1922,6 @@
       requestAnimationFrame(step);
     }
 
-    /* ---- Build legend ---- */
     function buildLegend(sectorStats) {
       legendItems.innerHTML = '';
       SECTORS.forEach(s => {
@@ -1836,7 +1947,6 @@
       });
     }
 
-    /* ---- Build ranking ---- */
     function buildRanking(top10) {
       rankList.innerHTML = '';
       top10.forEach((n, i) => {
@@ -1857,7 +1967,6 @@
       });
     }
 
-    /* ---- Search (parents only) ---- */
     function handleSearch(e) {
       const q = e.target.value.trim();
       if (!q) { searchResults.style.display = 'none'; return; }
@@ -1894,24 +2003,326 @@
       }
     });
 
-    /* ---- Tab click (stub) ---- */
+    const viewMain    = document.getElementById('main');
+    const viewNetwork = document.getElementById('canvas-wrap');
+    const viewLeft    = document.getElementById('left-panel');
+    const viewSector  = document.getElementById('view-sector');
+    const viewTable   = document.getElementById('view-table');
+    const viewAbout   = document.getElementById('view-about');
+    const legendEl    = document.getElementById('legend');
+
+    let currentTab = 'graph';
+
+    function switchTab(tab) {
+      if (tab === currentTab) return;
+
+      document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+      document.querySelector('.tab[data-tab="' + tab + '"]').classList.add('active');
+
+      viewNetwork.style.display = 'none';
+      viewLeft.style.display    = 'none';
+      legendEl.style.display    = 'none';
+      viewSector.style.display  = 'none';
+      viewTable.style.display   = 'none';
+      viewAbout.style.display   = 'none';
+
+      if (tab === 'graph') {
+        
+        viewNetwork.style.display = '';
+        viewLeft.style.display    = '';
+        legendEl.style.display    = '';
+        
+        resizeCanvas();
+        if (simulation) simulation.restart();
+        if (!animFrameId) {
+          lastFrameTime = performance.now();
+          render();
+        }
+      } else {
+        
+        if (animFrameId) {
+          cancelAnimationFrame(animFrameId);
+          animFrameId = null;
+        }
+        if (tab === 'sector') {
+          viewSector.style.display = 'flex';
+          if (!sectorBuilt) buildSectorView();
+        } else if (tab === 'table') {
+          viewTable.style.display = 'flex';
+          if (!tableBuilt) buildTableView();
+        } else if (tab === 'about') {
+          viewAbout.style.display = 'flex';
+        }
+      }
+
+      currentTab = tab;
+    }
+
     document.querySelectorAll('.tab').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-      });
+      btn.addEventListener('click', () => switchTab(btn.dataset.tab));
     });
 
-    /* ---- Info card close ---- */
+    let sectorBuilt = false;
+
+    function buildSectorView() {
+      if (!parentNodes.length) return;
+
+      const bySector = {};
+      SECTORS.forEach(s => { bySector[s.id] = []; });
+      parentNodes.forEach(p => {
+        if (bySector[p.sector] !== undefined) bySector[p.sector].push(p);
+      });
+
+      
+      if (!parentNodes[0]._childNames) {
+        
+        const childNameMap = {};
+        parentNodes.forEach(p => { childNameMap[p.id] = []; });
+
+        edges.forEach(e => {
+          const parent = nodes[e.source];
+          const child  = nodes[e.target];
+          if (!parent || parent.nodeType !== 'parent') return;
+          if (!child)  return;
+          const name = child.name || '';
+          if (name && childNameMap[parent.id] !== undefined) {
+            childNameMap[parent.id].push(name);
+          }
+        });
+        parentNodes.forEach(p => { p._childNames = childNameMap[p.id] || []; });
+      }
+
+      const grid = document.getElementById('sector-grid');
+      grid.innerHTML = '';
+
+      SECTORS.forEach(s => {
+        const sParents = bySector[s.id] || [];
+        const top5 = [...sParents].sort((a, b) => b.subsidiaryCount - a.subsidiaryCount).slice(0, 5);
+        const totalSubs = sParents.reduce((acc, p) => acc + (p.subsidiaryCount || 0), 0);
+
+        const card = document.createElement('div');
+        card.className = 'sector-card';
+
+        const top5Html = top5.map((p, i) =>
+          '<div class="sector-top5-item">' +
+            '<span class="sector-top5-rank">' + (i + 1) + '</span>' +
+            '<span class="sector-top5-ticker">' + (p.ticker || '—') + '</span>' +
+            '<span class="sector-top5-name">' + escHtml(p.name) + '</span>' +
+            '<span class="sector-top5-subs">' + p.subsidiaryCount + '</span>' +
+          '</div>'
+        ).join('');
+
+        card.innerHTML =
+          '<div class="sector-card-header">' +
+            '<div class="sector-card-dot" style="background:' + s.color + '"></div>' +
+            '<span class="sector-card-name">' + s.key + '</span>' +
+            '<span class="sector-card-count">' + sParents.length + ' co.</span>' +
+          '</div>' +
+          '<div class="sector-card-stats">' +
+            '<div class="sector-stat"><span class="sector-stat-val">' + sParents.length + '</span><span class="sector-stat-label">Parents</span></div>' +
+            '<div class="sector-stat"><span class="sector-stat-val">' + totalSubs.toLocaleString() + '</span><span class="sector-stat-label">Subsidiaries</span></div>' +
+            '<div class="sector-stat"><span class="sector-stat-val">' + (sParents.length ? Math.round(totalSubs / sParents.length) : 0) + '</span><span class="sector-stat-label">Avg / Co.</span></div>' +
+          '</div>' +
+          '<div class="sector-top5-label">Top 5 by Subsidiary Count</div>' +
+          top5Html +
+          '<div class="sector-hint">Click to highlight in Network</div>';
+
+        card.addEventListener('click', () => {
+          
+          switchTab('graph');
+          
+          activeSectors.clear();
+          activeSectors.add(s.id);
+          document.querySelectorAll('.legend-item').forEach(el => {
+            el.classList.toggle('dimmed', el.dataset.sector != s.id);
+          });
+        });
+
+        grid.appendChild(card);
+      });
+
+      sectorBuilt = true;
+    }
+
+    let tableBuilt      = false;
+    let tableData       = [];   
+    let tableAllData    = [];   
+    let tableSortCol    = 'subsidiaries';
+    let tableSortAsc    = false;
+    let tablePage       = 0;
+    const TABLE_PAGE_SIZE = 50;
+
+    function getExampleSubs(parent, maxLen) {
+      const names = (parent._childNames || []).slice(0, 4);
+      const joined = names.join(', ');
+      return joined.length > maxLen ? joined.slice(0, maxLen) + '...' : joined;
+    }
+
+    function buildTableView() {
+      if (!parentNodes.length) return;
+
+      if (!parentNodes[0]._childNames) {
+        const childNameMap = {};
+        parentNodes.forEach(p => { childNameMap[p.id] = []; });
+        edges.forEach(e => {
+          const parent = nodes[e.source];
+          const child  = nodes[e.target];
+          if (!parent || parent.nodeType !== 'parent') return;
+          if (!child) return;
+          const name = child.name || '';
+          if (name && childNameMap[parent.id] !== undefined) {
+            childNameMap[parent.id].push(name);
+          }
+        });
+        parentNodes.forEach(p => { p._childNames = childNameMap[p.id] || []; });
+      }
+
+      tableAllData = [...parentNodes].sort((a, b) => b.subsidiaryCount - a.subsidiaryCount);
+      tableAllData.forEach((p, i) => { p._tableRank = i + 1; });
+
+      tableData = [...tableAllData];
+      tableSortCol = 'subsidiaries';
+      tableSortAsc = false;
+      tablePage    = 0;
+
+      document.querySelectorAll('.data-table th[data-col]').forEach(th => {
+        th.classList.remove('sort-asc', 'sort-desc');
+        if (th.dataset.col === 'subsidiaries') th.classList.add('sort-desc');
+        th.addEventListener('click', () => tableSort(th.dataset.col));
+      });
+
+      const searchEl = document.getElementById('table-search');
+      searchEl.value = '';
+      searchEl.addEventListener('input', () => {
+        tableFilter(searchEl.value.trim());
+      });
+
+      document.getElementById('pager-prev').addEventListener('click', () => {
+        if (tablePage > 0) { tablePage--; renderTablePage(); }
+      });
+      document.getElementById('pager-next').addEventListener('click', () => {
+        const maxPage = Math.ceil(tableData.length / TABLE_PAGE_SIZE) - 1;
+        if (tablePage < maxPage) { tablePage++; renderTablePage(); }
+      });
+
+      renderTablePage();
+      tableBuilt = true;
+    }
+
+    function tableSort(col) {
+      if (tableSortCol === col) {
+        tableSortAsc = !tableSortAsc;
+      } else {
+        tableSortCol = col;
+        tableSortAsc = col !== 'subsidiaries'; 
+      }
+      tablePage = 0;
+
+      const cmp = (a, b) => {
+        let av, bv;
+        if (col === 'rank')         { av = a._tableRank;         bv = b._tableRank; }
+        else if (col === 'ticker')  { av = (a.ticker || '').toUpperCase(); bv = (b.ticker || '').toUpperCase(); }
+        else if (col === 'name')    { av = a.name.toUpperCase();  bv = b.name.toUpperCase(); }
+        else if (col === 'sector')  { av = SECTORS[a.sector].key; bv = SECTORS[b.sector].key; }
+        else                        { av = a.subsidiaryCount;      bv = b.subsidiaryCount; }
+        if (av < bv) return tableSortAsc ? -1 : 1;
+        if (av > bv) return tableSortAsc ? 1 : -1;
+        return 0;
+      };
+
+      tableData = [...tableData].sort(cmp);
+
+      document.querySelectorAll('.data-table th[data-col]').forEach(th => {
+        th.classList.remove('sort-asc', 'sort-desc');
+        if (th.dataset.col === col) th.classList.add(tableSortAsc ? 'sort-asc' : 'sort-desc');
+      });
+
+      renderTablePage();
+    }
+
+    function tableFilter(q) {
+      tablePage = 0;
+      if (!q) {
+        tableData = [...tableAllData];
+      } else {
+        const uq = q.toUpperCase();
+        tableData = tableAllData.filter(p =>
+          (p.ticker || '').toUpperCase().includes(uq) ||
+          p.name.toUpperCase().includes(uq)
+        );
+      }
+      
+      const col = tableSortCol;
+      const asc = tableSortAsc;
+      tableData = [...tableData].sort((a, b) => {
+        let av, bv;
+        if (col === 'rank')        { av = a._tableRank;         bv = b._tableRank; }
+        else if (col === 'ticker') { av = (a.ticker || '').toUpperCase(); bv = (b.ticker || '').toUpperCase(); }
+        else if (col === 'name')   { av = a.name.toUpperCase();  bv = b.name.toUpperCase(); }
+        else if (col === 'sector') { av = SECTORS[a.sector].key; bv = SECTORS[b.sector].key; }
+        else                       { av = a.subsidiaryCount;      bv = b.subsidiaryCount; }
+        if (av < bv) return asc ? -1 : 1;
+        if (av > bv) return asc ? 1 : -1;
+        return 0;
+      });
+      renderTablePage();
+    }
+
+    function renderTablePage() {
+      const tbody  = document.getElementById('table-body');
+      const start  = tablePage * TABLE_PAGE_SIZE;
+      const end    = Math.min(start + TABLE_PAGE_SIZE, tableData.length);
+      const slice  = tableData.slice(start, end);
+      const total  = tableData.length;
+      const isMob  = window.innerWidth < 640;
+
+      tbody.innerHTML = '';
+      slice.forEach(p => {
+        const sec = SECTORS[p.sector];
+        const tr  = document.createElement('tr');
+        tr.innerHTML =
+          '<td class="td-rank">' + p._tableRank + '</td>' +
+          '<td class="td-ticker">' + (p.ticker || '—') + '</td>' +
+          '<td><span class="td-sector-dot" style="background:' + sec.color + '"></span>' + escHtml(p.name) + '</td>' +
+          '<td style="font-size:11px;color:var(--ink-3)">' + sec.key + '</td>' +
+          '<td class="td-subs">' + p.subsidiaryCount + '</td>' +
+          '<td class="td-examples">' + escHtml(getExampleSubs(p, isMob ? 0 : 80)) + '</td>';
+
+        tr.addEventListener('click', () => {
+          switchTab('graph');
+          
+          setTimeout(() => {
+            const target = parentNodes.find(n => n.id === p.id);
+            if (target) selectNode(target);
+          }, 120);
+        });
+
+        tbody.appendChild(tr);
+      });
+
+      const maxPage = Math.ceil(total / TABLE_PAGE_SIZE) - 1;
+      document.getElementById('table-count').textContent =
+        total + ' compan' + (total === 1 ? 'y' : 'ies');
+      document.getElementById('pager-info').textContent =
+        (start + 1) + '–' + end + ' / ' + total;
+      document.getElementById('pager-prev').disabled = tablePage === 0;
+      document.getElementById('pager-next').disabled = tablePage >= maxPage;
+    }
+
+    function escHtml(s) {
+      return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
     infoClose.addEventListener('click', () => {
       infoCard.style.display = 'none';
       selectedNode = null;
       document.querySelectorAll('.rank-item').forEach(el => el.classList.remove('selected'));
     });
 
-    /* ================================================================
-       INIT SEQUENCE
-    ================================================================ */
     async function init() {
       resizeCanvas();
       window.addEventListener('resize', () => { resizeCanvas(); centerTransform(); });
@@ -1919,12 +2330,10 @@
       setLoading(5, 'Loading data...');
       await nextFrame();
 
-      // Step 1: Load real data or fallback to dummy
       const { nodes: loaded, edges: loadedEdges, isDummy } = await loadData();
       nodes      = loaded;
       edges      = loadedEdges;
 
-      // Mobile detection — filter to parent nodes only for performance
       const isMobile = window.innerWidth < 768 ||
         /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
       if (isMobile) {
@@ -1938,15 +2347,14 @@
       setLoading(25, 'Computing node sizes...');
       await nextFrame();
 
-      // Step 2: Node radii — parent: 8-20px by sub count, subsidiary: 2-3px fixed
-      // (don't shadow outer `parentNodes` set at L1935 — use local name)
+      
       const _parents = nodes.filter(n => n.nodeType === 'parent');
       const maxSubs = Math.max(..._parents.map(n => n.subsidiaryCount), 1);
       nodes.forEach(n => {
         if (n.nodeType === 'parent') {
           n._radius = calcNodeRadius(n.subsidiaryCount, maxSubs);
         } else {
-          // subsidiary: tiny dot, slightly larger if it has a known jurisdiction
+          
           n._radius = n.jurisdiction ? 2.5 : 2.0;
         }
       });
@@ -1954,19 +2362,17 @@
       setLoading(40, 'Building adjacency map...');
       await nextFrame();
 
-      // Step 3: Adjacency
       const adj = buildAdjacency(edges, nodes.length);
       nodes.forEach(n => { n._adj = adj[n.id]; });
 
       setLoading(55, 'Setting initial positions...');
       await nextFrame();
 
-      // Step 4: Initial positions
-      // Parents: radial layout as before
-      // Subsidiaries: placed near their parent (with small random offset)
+      
+      
       centerTransform();
       const rand0 = mulberry32(20260614);
-      // Build parent id -> position map first
+      
       const parentPos = {};
       let pIdx = 0;
       const pCount = nodes.filter(n => n.nodeType === 'parent').length;
@@ -1977,10 +2383,10 @@
           parentPos[n.id] = { x: pos.x, y: pos.y };
         }
       });
-      // Subsidiaries: near their parent (from parent_id in data)
+      
       nodes.forEach(n => {
         if (n.nodeType !== 'subsidiary') return;
-        // Find parent via edge source
+        
         const pId = n._parentId || null;
         const base = pId !== null && parentPos[pId] ? parentPos[pId] : { x: 0, y: 0 };
         const angle = rand0() * Math.PI * 2;
@@ -1992,13 +2398,12 @@
       setLoading(68, 'Starting D3 force simulation...');
       await nextFrame();
 
-      // Step 5: Force simulation — tuned for 10k nodes
-      // Barnes-Hut theta 0.92 (relaxed), distanceMax 200 (tighter), faster decay
+      
       simulation = d3.forceSimulation(nodes)
         .force('link', d3.forceLink(edges)
           .id(d => d.id)
           .distance(d => {
-            // Parent-to-subsidiary: short links to cluster subsidiaries near parent
+            
             const target = nodes[typeof d.target === 'object' ? d.target.id : d.target];
             return target && target.nodeType === 'subsidiary' ? 22 : 42;
           })
@@ -2025,7 +2430,6 @@
       setLoading(82, 'Building UI...');
       await nextFrame();
 
-      // Step 6: UI — ranking and legend use parent nodes only
       const sectorStats = calcSectorStats(parentNodes);
       buildLegend(sectorStats);
       buildRanking(topNBySubsidiaries(parentNodes, 10));
@@ -2060,7 +2464,6 @@
         if (hudMobileVal) hudMobileVal.textContent = nc + ' parents only';
       }
 
-      // Step 7: Event listeners
       canvas.addEventListener('mousedown', handleMouseDown, { passive: true });
       canvas.addEventListener('mouseup',   handleMouseUp,   { passive: true });
       canvas.addEventListener('mousemove', handleMouseMove, { passive: true });
@@ -2089,9 +2492,6 @@
       return new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
     }
 
-    /* ================================================================
-       ?test=1 — Unit tests (pure functions)
-    ================================================================ */
     if (window.location.search.includes('test=1')) {
       runTests();
     }
@@ -2105,14 +2505,12 @@
         else           { failed++; results.push({ ok: false, name, detail: detail || '' }); }
       }
 
-      /* ---- mulberry32 ---- */
       const r1 = mulberry32(42);
       assert('mulberry32: output in [0,1)',     r1() >= 0 && r1() < 1);
       const r2a = mulberry32(42), r2b = mulberry32(42);
       assert('mulberry32: same seed = same seq', r2a() === r2b());
       assert('mulberry32: diff seeds differ',    mulberry32(1)() !== mulberry32(2)());
 
-      /* ---- generateTicker ---- */
       const rt = mulberry32(77);
       const tk0 = generateTicker(rt, 0);
       assert('generateTicker: returns string',   typeof tk0 === 'string');
@@ -2121,7 +2519,6 @@
       assert('generateTicker: large index string', typeof tk_large === 'string');
       assert('generateTicker: large index non-empty', tk_large.length >= 2);
 
-      /* ---- generateCompanyName ---- */
       const rn = mulberry32(10);
       const nm0 = generateCompanyName(rn, 0);
       assert('generateCompanyName: index 0 = Apple', nm0 === 'Apple');
@@ -2129,24 +2526,20 @@
       assert('generateCompanyName: large index string', typeof nm_large === 'string');
       assert('generateCompanyName: large index non-empty', nm_large.length > 0);
 
-      /* ---- generateMarketCap ---- */
       const rmc = mulberry32(55);
       const mc1 = generateMarketCap(rmc);
       assert('generateMarketCap: positive integer', mc1 > 0 && Number.isInteger(mc1));
 
-      /* ---- formatMarketCap ---- */
       assert('formatMarketCap: < 1000 uses B',   formatMarketCap(500)  === '$500B');
       assert('formatMarketCap: >= 1000 uses T',  formatMarketCap(2000) === '$2.0T');
       assert('formatMarketCap: exact 1000 = T',  formatMarketCap(1000) === '$1.0T');
 
-      /* ---- generateSectorId ---- */
       const rs = mulberry32(33);
       const sid = generateSectorId(rs, 0);
       assert('generateSectorId: index 0 = IT (0)', sid === 0);
       const sid_rand = generateSectorId(mulberry32(44), 300);
       assert('generateSectorId: valid range', sid_rand >= 0 && sid_rand < SECTORS.length);
 
-      /* ---- calcInitialPosition ---- */
       const p0 = calcInitialPosition(0, 503, 0, 0);
       assert('calcInitialPosition: has x,y', 'x' in p0 && 'y' in p0);
       assert('calcInitialPosition: index 0 non-origin', p0.x !== 0 || p0.y !== 0);
@@ -2154,7 +2547,6 @@
       const pB = calcInitialPosition(10, 100, 0, 0);
       assert('calcInitialPosition: cx/cy shift', pA.x !== pB.x || pA.y !== pB.y);
 
-      /* ---- calcNodeRadius ---- */
       const rMin = calcNodeRadius(0, 100);
       const rMax = calcNodeRadius(100, 100);
       const rMid = calcNodeRadius(50, 100);
@@ -2163,7 +2555,6 @@
       assert('calcNodeRadius: mid in range',       rMid > rMin && rMid < rMax);
       assert('calcNodeRadius: maxCount=0 no NaN',  isFinite(calcNodeRadius(5, 0)));
 
-      /* ---- fpsColorClass ---- */
       assert('fpsColorClass: 60 -> good',  fpsColorClass(60) === 'good');
       assert('fpsColorClass: 50 -> good',  fpsColorClass(50) === 'good');
       assert('fpsColorClass: 40 -> warn',  fpsColorClass(40) === 'warn');
@@ -2171,12 +2562,10 @@
       assert('fpsColorClass: 29 -> bad',   fpsColorClass(29) === 'bad');
       assert('fpsColorClass: 0  -> bad',   fpsColorClass(0)  === 'bad');
 
-      /* ---- dist2 ---- */
       assert('dist2: same point = 0',    dist2(1, 2, 1, 2) === 0);
       assert('dist2: 3-4-5 triangle',    dist2(0, 0, 3, 4) === 25);
       assert('dist2: symmetry',          dist2(-1, -1, 2, 3) === dist2(2, 3, -1, -1));
 
-      /* ---- findNearestNode ---- */
       const dNodes = [
         { id: 0, x: 0,   y: 0 },
         { id: 1, x: 100, y: 0 },
@@ -2187,7 +2576,6 @@
       assert('findNearestNode: out of range null',  findNearestNode(dNodes, 5, 5, tr, 1) === null);
       assert('findNearestNode: picks correct node', findNearestNode(dNodes, 98, 2, tr, 30).id === 1);
 
-      /* ---- buildAdjacency ---- */
       const dEdges = [{ source: 0, target: 1 }, { source: 1, target: 2 }];
       const adj2   = buildAdjacency(dEdges, 3);
       assert('buildAdjacency: correct length',      adj2.length === 3);
@@ -2195,7 +2583,6 @@
       assert('buildAdjacency: 1 adj has 0 and 2',   adj2[1].includes(0) && adj2[1].includes(2));
       assert('buildAdjacency: 2 adj has 1',         adj2[2].includes(1));
 
-      /* ---- topNBySubsidiaries ---- */
       const dn = [
         { id:0, subsidiaryCount:5 }, { id:1, subsidiaryCount:20 },
         { id:2, subsidiaryCount:1 }, { id:3, subsidiaryCount:10 },
@@ -2206,7 +2593,6 @@
       assert('topNBySubsidiaries: second correct',  top2[1].subsidiaryCount === 10);
       assert('topNBySubsidiaries: original intact', dn.length === 4);
 
-      /* ---- calcSectorStats ---- */
       const sNodes = [
         { sector: 0 }, { sector: 0 }, { sector: 1 }, { sector: 2 }
       ];
@@ -2216,7 +2602,6 @@
       assert('calcSectorStats: sector 1 = 1',  stats[1] === 1);
       assert('calcSectorStats: sector 2 = 1',  stats[2] === 1);
 
-      /* ---- searchNodes ---- */
       const snodes = [
         { ticker: 'AAPL', name: 'Apple', sector: 0 },
         { ticker: 'AMZN', name: 'Amazon', sector: 3 },
@@ -2233,13 +2618,11 @@
       const r_empty = searchNodes(snodes, '', 5);
       assert('searchNodes: empty query = []',      r_empty.length === 0);
 
-      /* ---- SECTORS structure ---- */
       assert('SECTORS: has 11 entries',            SECTORS.length === 11);
       assert('SECTORS: all have color field',       SECTORS.every(s => s.color.startsWith('#')));
       assert('SECTORS: all have key field',         SECTORS.every(s => typeof s.key === 'string'));
       assert('SECTORS: SECTOR_KEY_MAP coverage',    Object.keys(SECTOR_KEY_MAP).length === 11);
 
-      /* ---- Total ---- */
       const total = passed + failed;
       const overlay = document.getElementById('test-overlay');
       overlay.style.display = 'block';
@@ -2261,57 +2644,12 @@
       loading.style.display = 'none';
     }
 
-    /* Start */
     init().catch(err => {
       loadingStatus.textContent = 'Error: ' + err.message;
     });
 
-  })(); // App IIFE
+  })(); 
 
   </script>
-
-  <!--
-  ================================================================
-  DATA LAYER INTEGRATION SPEC
-  Real data replaces dummy via: fetch data/companies-us.json + data/relations-us.json
-
-  data/companies-us.json:
-  {
-    "version": "1.0",
-    "generated_at": "2026-06-14T00:00:00Z",
-    "source": "SEC Exhibit 21 / EDGAR",
-    "companies": [
-      {
-        "id": 0,              // 0-based integer index
-        "ticker": "AAPL",    // NYSE/NASDAQ ticker
-        "name": "Apple",     // display name
-        "sector": "Information Technology", // GICS sector key
-        "market": "NASDAQ",  // "NYSE" | "NASDAQ"
-        "market_cap_b": 3200  // market cap in billions USD (null OK)
-      }
-    ]
-  }
-
-  data/relations-us.json:
-  {
-    "version": "1.0",
-    "generated_at": "2026-06-14T00:00:00Z",
-    "source": "SEC Exhibit 21 filings via EDGAR",
-    "relations": [
-      {
-        "parent_id": 0,                 // companies[].id of parent S&P500 co
-        "child_id": null,               // null = non-listed subsidiary
-        "child_name": "Apple Retail US", // subsidiary legal name
-        "child_country": "US",           // jurisdiction (ISO-3166 alpha-2)
-        "filing_year": 2024,             // Exhibit 21 fiscal year
-        "relation_type": "subsidiary"    // "subsidiary" | "equity_method"
-      }
-    ]
-  }
-
-  Integration: drop both JSON files into apps/capital-map-us/data/
-  The loadData() function auto-detects and switches from DUMMY to LIVE mode.
-  ================================================================
-  -->
 </body>
 </html>
