@@ -863,6 +863,10 @@
           <span class="hud-label">Mode</span>
           <span class="hud-val" id="hud-mode" style="color:#E8834A">DUMMY</span>
         </div>
+        <div class="hud-row" id="hud-mobile-row" style="display:none">
+          <span class="hud-label">View</span>
+          <span class="hud-val" id="hud-mobile-val" style="color:#5B9BD5">Mobile</span>
+        </div>
         <div id="fps-warn">WARNING: FPS &lt; 30</div>
       </div>
 
@@ -1919,7 +1923,16 @@
       const { nodes: loaded, edges: loadedEdges, isDummy } = await loadData();
       nodes      = loaded;
       edges      = loadedEdges;
-      parentNodes = nodes.filter(n => n.nodeType === 'parent');
+
+      // Mobile detection — filter to parent nodes only for performance
+      const isMobile = window.innerWidth < 768 ||
+        /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+      if (isMobile) {
+        nodes = nodes.filter(n => n.nodeType === 'parent' || n.nodeType === undefined);
+        edges = [];
+      }
+
+      parentNodes = nodes.filter(n => n.nodeType === 'parent' || n.nodeType === undefined);
       subNodes    = nodes.filter(n => n.nodeType === 'subsidiary');
 
       setLoading(25, 'Computing node sizes...');
@@ -2037,6 +2050,13 @@
         hudMode.textContent    = 'LIVE v0.5';
         hudMode.style.color    = '#5A9E6F';
         dataBadgeLabel.textContent = 'SEC Exhibit 21 — ' + ec.toLocaleString() + ' edges';
+      }
+
+      if (isMobile) {
+        const hudMobileRow = document.getElementById('hud-mobile-row');
+        const hudMobileVal = document.getElementById('hud-mobile-val');
+        if (hudMobileRow) hudMobileRow.style.display = 'flex';
+        if (hudMobileVal) hudMobileVal.textContent = nc + ' parents only';
       }
 
       // Step 7: Event listeners
