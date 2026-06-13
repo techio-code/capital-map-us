@@ -1939,8 +1939,9 @@
       await nextFrame();
 
       // Step 2: Node radii — parent: 8-20px by sub count, subsidiary: 2-3px fixed
-      const parentNodes = nodes.filter(n => n.nodeType === 'parent');
-      const maxSubs = Math.max(...parentNodes.map(n => n.subsidiaryCount), 1);
+      // (don't shadow outer `parentNodes` set at L1935 — use local name)
+      const _parents = nodes.filter(n => n.nodeType === 'parent');
+      const maxSubs = Math.max(..._parents.map(n => n.subsidiaryCount), 1);
       nodes.forEach(n => {
         if (n.nodeType === 'parent') {
           n._radius = calcNodeRadius(n.subsidiaryCount, maxSubs);
