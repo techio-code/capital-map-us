@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<!-- Capital Map US — Team Techio App #26 (US Edition) | S&P500 Subsidiary Network -->
-<html lang="en">
+<!-- Capital Map US — Team Techio App #26 (US Edition) | S&P500 親子関係ネットワーク -->
+<html lang="ja">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Capital Map US — S&P500 Subsidiary Network</title>
-  <meta name="description" content="Interactive visualization of S&P500 subsidiary networks across 11 GICS sectors. 503 companies, force-directed graph by Team Techio.">
+  <title>Capital Map US — S&P500 親子関係ネットワーク</title>
+  <meta name="description" content="S&P500 503社の親子関係を可視化。SEC EDGAR Exhibit 21 + 13F機関投資家データ統合。11 GICSセクター対応。チームてちお制作。">
 
   <!-- OGP -->
-  <meta property="og:title" content="Capital Map US — S&P500 Subsidiary Network">
-  <meta property="og:description" content="Visualize S&P500 corporate subsidiary networks. 503 companies across 11 GICS sectors, powered by D3.js.">
+  <meta property="og:title" content="Capital Map US — S&P500 親子関係ネットワーク">
+  <meta property="og:description" content="S&P500 503社の子会社ネットワークを可視化。11 GICSセクター・機関投資家データ統合。D3.js製。">
   <meta property="og:image" content="https://techio-code.github.io/capital-map-us/ogp.png">
   <meta property="og:url" content="https://techio-code.github.io/capital-map-us/">
   <meta property="og:type" content="website">
@@ -44,48 +44,48 @@
 </div>
 <div>
 <div class="brand-title">Capital Map US</div>
-<div class="brand-sub">S&amp;P500 Subsidiary Network</div>
+<div class="brand-sub">S&amp;P500 親子関係ネットワーク</div>
 </div>
 </div>
 <div id="tabs">
-<button class="tab active" data-tab="graph">Network</button>
-<button class="tab" data-tab="sector">By Sector</button>
-<button class="tab" data-tab="table">Table</button>
-<button class="tab" data-tab="about">About</button>
+<button class="tab active" data-tab="graph">ネットワーク</button>
+<button class="tab" data-tab="sector">セクター別</button>
+<button class="tab" data-tab="table">一覧</button>
+<button class="tab" data-tab="about">概要</button>
 <button class="tab" data-tab="portfolio" id="btn-portfolio-tab">
-Portfolio
+ポートフォリオ
 <span id="portfolio-count-badge"></span>
 </button>
 </div>
 <!-- Portfolio highlight toggle (shown when portfolio is loaded) -->
-<button id="portfolio-highlight-btn" title="Toggle portfolio highlight on graph" style="display:none">
-Highlight OFF
+<button id="portfolio-highlight-btn" title="ネットワーク上のポートフォリオ強調表示を切り替え" style="display:none">
+強調表示 OFF
 </button>
 <!-- Portfolio modal open button -->
 <button class="pm-btn" id="portfolio-open-btn" style="margin-left:var(--sp-sm);height:28px;font-size:10px;">
-+ Portfolio
++ ポートフォリオ追加
 </button>
 </header>
 <!-- PORTFOLIO MODAL -->
 <div id="portfolio-modal-bg">
 <div id="portfolio-modal">
 <button class="pm-close" id="pm-close-btn">x</button>
-<div class="pm-title">Portfolio Import</div>
+<div class="pm-title">ポートフォリオ読み込み</div>
 <div class="pm-desc">
-Enter ticker symbols (one per line) or upload a CSV file. Data is stored locally in your browser only.
+ティッカーシンボルを1行ずつ入力するか、CSVファイルをアップロードしてください。データはブラウザ内にのみ保存されます。
 </div>
-<div class="pm-label">Tickers (one per line)</div>
+<div class="pm-label">ティッカー（1行1銘柄）</div>
 <textarea id="portfolio-textarea" placeholder="AAPL&#10;MSFT&#10;GOOGL&#10;NVDA&#10;..."></textarea>
-<div class="pm-or"><span>OR</span></div>
+<div class="pm-or"><span>または</span></div>
 <label class="pm-file-btn" for="portfolio-file">
 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-Upload CSV
+CSVをアップロード
 </label>
 <input type="file" id="portfolio-file" accept=".csv,.txt">
 <div class="pm-actions">
-<button class="pm-btn primary" id="pm-save-btn">Save Portfolio</button>
-<button class="pm-btn" id="pm-sample-btn">Load Sample</button>
-<button class="pm-btn" id="pm-clear-btn">Clear</button>
+<button class="pm-btn primary" id="pm-save-btn">保存</button>
+<button class="pm-btn" id="pm-sample-btn">サンプル読込</button>
+<button class="pm-btn" id="pm-clear-btn">クリア</button>
 </div>
 <div class="pm-status" id="pm-status"></div>
 </div>
@@ -95,21 +95,21 @@ Upload CSV
 <!-- LEFT PANEL -->
 <aside id="left-panel">
 <div class="panel-section">
-<div class="panel-label">S&amp;P500 Companies</div>
+<div class="panel-label">S&amp;P500 企業数</div>
 <div class="panel-value" id="stat-nodes">503</div>
-<div class="panel-value-sub" id="stat-nodes-sub">Nodes — Dummy data</div>
+<div class="panel-value-sub" id="stat-nodes-sub">ノード — ダミーデータ</div>
 <div id="data-badge">
 <span class="badge-dot"></span>
 <span id="data-source-label">DUMMY — Exhibit 21 pending</span>
 </div>
 </div>
 <div class="panel-section">
-<div class="panel-label">Subsidiary Links</div>
+<div class="panel-label">親子関係</div>
 <div class="panel-value" id="stat-edges">—</div>
-<div class="panel-value-sub">Parent-child edges</div>
+<div class="panel-value-sub">親-子エッジ</div>
 </div>
 <div class="panel-section">
-<div class="panel-label">Subsidiaries — Top 10</div>
+<div class="panel-label">子会社数 TOP10</div>
 </div>
 <div id="ranking-list"></div>
 </aside>
@@ -121,7 +121,7 @@ Upload CSV
 <input
 id="search-input"
 type="text"
-placeholder="Search ticker or name..."
+placeholder="ティッカー or 社名で検索…"
 autocomplete="off"
 spellcheck="false"
 >
@@ -134,26 +134,26 @@ spellcheck="false"
 <span class="hud-val" id="hud-fps">—</span>
 </div>
 <div class="hud-row">
-<span class="hud-label">Nodes</span>
+<span class="hud-label">ノード</span>
 <span class="hud-val" id="hud-nodes">—</span>
 </div>
 <div class="hud-row">
-<span class="hud-label">Edges</span>
+<span class="hud-label">関係数</span>
 <span class="hud-val" id="hud-edges">—</span>
 </div>
 <div class="hud-row">
-<span class="hud-label">Zoom</span>
+<span class="hud-label">ズーム</span>
 <span class="hud-val" id="hud-zoom">1.0x</span>
 </div>
 <div class="hud-row">
-<span class="hud-label">Mode</span>
+<span class="hud-label">モード</span>
 <span class="hud-val" id="hud-mode" style="color:#E8834A">DUMMY</span>
 </div>
 <div class="hud-row" id="hud-mobile-row" style="display:none">
-<span class="hud-label">View</span>
-<span class="hud-val" id="hud-mobile-val" style="color:#5B9BD5">Mobile</span>
+<span class="hud-label">表示</span>
+<span class="hud-val" id="hud-mobile-val" style="color:#5B9BD5">モバイル</span>
 </div>
-<div id="fps-warn">WARNING: FPS &lt; 30</div>
+<div id="fps-warn">警告: FPS &lt; 30</div>
 </div>
 <!-- TOOLTIP -->
 <div id="tooltip">
@@ -164,7 +164,7 @@ spellcheck="false"
 </div>
 <!-- INFO CARD -->
 <div id="info-card">
-<div class="info-eyebrow">Selected Company</div>
+<div class="info-eyebrow">選択中の企業</div>
 <div class="info-ticker" id="info-ticker"></div>
 <div class="info-name" id="info-name"></div>
 <div class="info-meta" id="info-meta"></div>
@@ -172,11 +172,11 @@ spellcheck="false"
 </div>
 <!-- LOADING -->
 <div id="loading">
-<div class="loading-title">Capital Map US — Building Graph</div>
+<div class="loading-title">Capital Map US — グラフ構築中</div>
 <div class="loading-bar-wrap">
 <div class="loading-bar" id="loading-bar"></div>
 </div>
-<div class="loading-status" id="loading-status">Initializing...</div>
+<div class="loading-status" id="loading-status">読み込み中…</div>
 </div>
 </div>
 <!-- BY SECTOR VIEW -->
@@ -186,12 +186,12 @@ spellcheck="false"
 <!-- TABLE VIEW -->
 <div id="view-table">
 <div class="table-toolbar">
-<input class="table-search" id="table-search" type="text" placeholder="Search ticker or name..." autocomplete="off" spellcheck="false">
+<input class="table-search" id="table-search" type="text" placeholder="ティッカー or 社名で検索…" autocomplete="off" spellcheck="false">
 <span class="table-count" id="table-count"></span>
 <div class="table-pager">
-<button class="pager-btn" id="pager-prev">Prev</button>
+<button class="pager-btn" id="pager-prev">前へ</button>
 <span class="pager-info" id="pager-info"></span>
-<button class="pager-btn" id="pager-next">Next</button>
+<button class="pager-btn" id="pager-next">次へ</button>
 </div>
 </div>
 <div class="table-wrap">
@@ -199,11 +199,11 @@ spellcheck="false"
 <thead>
 <tr>
 <th class="td-rank" data-col="rank">#</th>
-<th data-col="ticker">Ticker</th>
-<th data-col="name">Name</th>
-<th data-col="sector">Sector</th>
-<th class="td-subs" data-col="subsidiaries">Subs</th>
-<th class="td-examples">Top Subsidiaries</th>
+<th data-col="ticker">ティッカー</th>
+<th data-col="name">企業名</th>
+<th data-col="sector">セクター</th>
+<th class="td-subs" data-col="subsidiaries">子会社数</th>
+<th class="td-examples">主要子会社</th>
 </tr>
 </thead>
 <tbody id="table-body"></tbody>
@@ -217,70 +217,68 @@ spellcheck="false"
 <!-- ABOUT VIEW -->
 <div id="view-about">
 <div class="about-inner">
-<div class="about-hero-eyebrow">Team Techio / Capital Map US</div>
-<div class="about-hero-title">S&amp;P 500 Subsidiary Network</div>
+<div class="about-hero-eyebrow">チームてちお / Capital Map US</div>
+<div class="about-hero-title">S&amp;P500 親子関係ネットワーク（日本語版）</div>
 <div class="about-hero-desc">
-Who owns what in corporate America? Capital Map US maps every disclosed subsidiary of
-every S&amp;P 500 company — parsed directly from SEC EDGAR Exhibit 21 (10-K annual filings).
-Explore the hidden ownership web across 11 GICS sectors, from mega-conglomerates to lean pure-plays.
+SEC EDGAR の Exhibit 21（10-K別添「主要子会社一覧」）と 13F-HR（機関投資家の保有報告）を統合した、S&amp;P500 503社の資本関係を可視化するツールです。
 </div>
 <div class="about-stats-row">
 <div class="about-stat">
 <span class="about-stat-val">503</span>
-<span class="about-stat-label">S&amp;P 500 Parents</span>
+<span class="about-stat-label">S&amp;P500 親会社</span>
 </div>
 <div class="about-stat">
 <span class="about-stat-val">9,690</span>
-<span class="about-stat-label">Subsidiaries</span>
+<span class="about-stat-label">子会社</span>
 </div>
 <div class="about-stat">
 <span class="about-stat-val">9,846</span>
-<span class="about-stat-label">Relationships</span>
+<span class="about-stat-label">親子関係</span>
 </div>
 <div class="about-stat">
 <span class="about-stat-val">11</span>
-<span class="about-stat-label">GICS Sectors</span>
+<span class="about-stat-label">GICSセクター</span>
 </div>
 </div>
 <div class="about-section">
-<div class="about-section-title">Data Sources</div>
+<div class="about-section-title">データソース</div>
 <p>
-<strong style="color:var(--ink-1)">SEC EDGAR Exhibit 21</strong> — Legal attachment to each company's 10-K annual report listing significant subsidiaries and their jurisdictions of incorporation.
+<strong style="color:var(--ink-1)">SEC EDGAR Exhibit 21</strong> — 各社の10-K年次報告書に添付される「主要子会社一覧」。子会社名と設立地（jurisdiction）が記載されています。
 </p>
 <p>
-<strong style="color:var(--ink-1)">13F-HR filings (SEC EDGAR)</strong> — Institutional Investment Manager quarterly holdings reports filed with the SEC. Data covers 25 major institutions (Q1 2026 / Q4 2025 for Vanguard). Ownership % derived from each institution's disclosed share count and value.
+<strong style="color:var(--ink-1)">13F-HR filings（SEC EDGAR）</strong> — 機関投資家が四半期ごとにSECへ提出する保有株報告。25機関のデータ（2026年Q1 / Vanguardのみ2025年Q4）を収録。持株比率は各機関の開示株数・評価額から算出。
 </p>
 <p>
-Subsidiary updated: <span style="color:var(--ink-1);font-family:var(--font-mono)">2026-06-14</span> &nbsp;|&nbsp;
-13F updated: <span style="color:var(--ink-1);font-family:var(--font-mono)">2026-06-14</span> &nbsp;|&nbsp;
-Source: <span style="color:var(--ink-1);font-family:var(--font-mono)">SEC EDGAR</span>
+子会社データ更新: <span style="color:var(--ink-1);font-family:var(--font-mono)">2026-06-14</span> &nbsp;|&nbsp;
+13F更新: <span style="color:var(--ink-1);font-family:var(--font-mono)">2026-06-14</span> &nbsp;|&nbsp;
+出典: <span style="color:var(--ink-1);font-family:var(--font-mono)">SEC EDGAR</span>
 </p>
 <p style="font-family:var(--font-mono);font-size:11px;color:var(--ink-3)">
-Ownership % coverage: <strong style="color:var(--ink-1)">206 / 9,846 edges (2.1%)</strong> have disclosed ownership % &nbsp;|&nbsp;
-13F coverage: <strong style="color:var(--ink-1)">416 / 503 S&amp;P 500 companies</strong>
+持株比率取得率: <strong style="color:var(--ink-1)">206 / 9,846 エッジ（2.1%）</strong> &nbsp;|&nbsp;
+13Fカバー率: <strong style="color:var(--ink-1)">416 / 503社</strong>
 </p>
 </div>
 <div class="about-section">
-<div class="about-section-title">How to Use</div>
-<p><strong style="color:var(--ink-1)">NETWORK</strong> — Force-directed graph showing all 503 parent companies and 9,690 subsidiaries. Click any parent node to highlight its subsidiary network. Use the legend to filter by GICS sector. Scroll to zoom, drag to pan.</p>
-<p><strong style="color:var(--ink-1)">BY SECTOR</strong> — Cards for all 11 GICS sectors. See parent count, total subsidiaries, and the top 5 companies by subsidiary count per sector. Click a card to switch to the Network view filtered to that sector.</p>
-<p><strong style="color:var(--ink-1)">TABLE</strong> — Sortable, searchable table of all 503 parent companies. Sort by ticker, name, sector, or subsidiary count. Search by ticker or company name.</p>
-<p><strong style="color:var(--ink-1)">PORTFOLIO</strong> — Import your holdings (ticker list or CSV). See sector diversification, top subsidiaries behind your positions, overlap warnings, and suggestions for uncovered sectors. Holdings are highlighted in gold on the Network graph.</p>
+<div class="about-section-title">使い方</div>
+<p><strong style="color:var(--ink-1)">ネットワーク</strong> — 503社の親会社と9,690社の子会社を力学的グラフで表示。親会社ノードをクリックすると子会社ネットワークをハイライト。凡例クリックでGICSセクターフィルタ。スクロールでズーム、ドラッグでパン。</p>
+<p><strong style="color:var(--ink-1)">セクター別</strong> — GICS 11セクターのカード表示。各セクターの親会社数・子会社総数・上位5社を確認できます。カードをクリックするとネットワーク表示に切り替わります。</p>
+<p><strong style="color:var(--ink-1)">一覧</strong> — 503社のソート・検索可能な表。ティッカー・企業名・セクター・子会社数でソート。行クリックでネットワーク表示に遷移。</p>
+<p><strong style="color:var(--ink-1)">ポートフォリオ</strong> — 保有銘柄をティッカーリストまたはCSVで読み込み。セクター分散・主要子会社・集中リスク警告・未カバーセクターの候補企業を表示。保有銘柄はネットワーク上に金色でハイライト。</p>
 </div>
 <div class="about-section">
-<div class="about-section-title">Limitations</div>
+<div class="about-section-title">制限事項</div>
 <ul class="about-limitation-list">
-<li>6 S&amp;P 500 companies embed Exhibit 21 within the 10-K body rather than as a separate attachment and are excluded from this dataset:
+<li>Exhibit 21 を10-K本体に埋め込む6社を除外:
 <span class="about-excluded-tickers">ANET ERIE FDXF ODFL VRSN VRSK</span></li>
-<li>Subsidiary data reflects SEC disclosure at the time of each company's most recent 10-K filing. Acquisitions, divestitures, or restructurings after filing are not reflected.</li>
-<li>Only subsidiaries explicitly listed in Exhibit 21 are included. Minority stakes and joint ventures may be omitted at the company's discretion under SEC rules.</li>
-<li>Jurisdictions are as disclosed — many filings omit jurisdiction information for individual subsidiaries.</li>
-<li>13F institutional data: 87 of 503 S&amp;P 500 companies had no institutional holder match (name normalization mismatch between 13F issuer names and S&amp;P 500 company names). These companies show "No institutional data available" in the info card.</li>
-<li>Ownership % (edge thickness) is disclosed for only 206 of 9,846 subsidiary relationships (2.1%). The majority of relationships show uniform thin lines — this reflects SEC non-disclosure norms, not actual 100% ownership.</li>
+<li>子会社データは各社の直近10-K提出時点の情報です。提出後の買収・売却・組織再編は反映されません。</li>
+<li>Exhibit 21 に明記された子会社のみ収録。少数株主持分やJVはSECルール上、会社の裁量で省略可能です。</li>
+<li>設立地（jurisdiction）は開示通りです。多くのファイリングでは個別子会社の設立地が省略されています。</li>
+<li>13F機関投資家データ未取得: 87 / 503社（13F発行体名とS&amp;P500社名の名寄せ不一致）。該当企業はinfo cardに「機関投資家データなし」と表示されます。</li>
+<li>持株比率（エッジ太さ）は9,846件中206件（2.1%）のみ開示。大多数は細線表示 — これはSECの非開示慣行を反映しており、実際の100%子会社であることを否定するものではありません。</li>
 </ul>
 </div>
 <div class="about-section">
-<div class="about-section-title">Credit</div>
+<div class="about-section-title">制作</div>
 <div class="about-credit-row">
 <a class="about-credit-link" href="https://x.com/techio_code" target="_blank" rel="noopener">
 <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.257 5.628zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
@@ -300,22 +298,22 @@ techio-code/capital-map-us
 </div>
 <!-- LEGEND -->
 <div id="legend">
-<div class="legend-label">GICS Sector</div>
+<div class="legend-label">GICSセクター</div>
 <div class="legend-items" id="legend-items"></div>
 <div id="node-type-legend">
 <div class="nt-item">
 <div class="nt-circle-parent"></div>
-<span>Parent (S&amp;P 500)</span>
+<span>親会社（S&amp;P500）</span>
 </div>
 <div class="nt-item">
 <div class="nt-circle-child"></div>
-<span>Subsidiary</span>
+<span>子会社</span>
 </div>
 </div>
 </div>
 <!-- FOOTER -->
 <footer id="footer">
-<span class="footer-left">Team Techio / Capital Map US v0.7 — S&amp;P500 + Subsidiary Network + Portfolio + 13F Institutional (SEC)</span>
+<span class="footer-left">チームてちお / Capital Map US v0.7 — S&amp;P500 親子関係ネットワーク + ポートフォリオ + 13F機関投資家（SEC）</span>
 <span class="footer-right">
 <a href="https://x.com/techio_code" target="_blank" rel="noopener">@techio_code</a>
 </span>
@@ -868,28 +866,28 @@ techio-code/capital-map-us
       if (isSubHover) {
       /* --- Tooltip: subsidiary with ownership_pct badge --- */
       const pct = nearest._ownershipPct;
-      let ownerLine = 'Subsidiary';
+      let ownerLine = '完全子会社';
       if (nearest.jurisdiction) ownerLine += ' — ' + nearest.jurisdiction;
       if (pct !== null && pct !== undefined) {
         const parentNode = nearest._parentId !== undefined ? nodes[nearest._parentId] : null;
         const parentTicker = parentNode && parentNode.ticker ? parentNode.ticker : '';
-        ownerLine += (parentTicker ? ' · ' + pct + '% owned by ' + parentTicker : ' · ' + pct + '%');
+        ownerLine += (parentTicker ? ' · 所有：' + parentTicker + ' ' + pct + '%' : ' · ' + pct + '%');
       }
       ttTicker.textContent = ownerLine;
       /* badge */
       let badge = '';
       if (pct !== null && pct !== undefined) {
-        if (pct >= 50)      badge = ' [subsidiary]';
-        else if (pct >= 20) badge = ' [affiliate]';
-        else                badge = ' [minor stake]';
+        if (pct >= 50)      badge = ' [完全子会社]';
+        else if (pct >= 20) badge = ' [持分法適用]';
+        else                badge = ' [少額出資]';
       }
       ttSector.textContent = sec.key + badge;
       ttMcap.textContent   = '';
       } else {
       ttTicker.textContent = nearest.ticker || '';
       ttSector.textContent = sec.key + ' (' + sec.short + ')';
-      ttMcap.textContent   = 'Mkt Cap: ' + formatMarketCap(nearest.marketCapB) +
-        ' | Subs: ' + nearest.subsidiaryCount;
+      ttMcap.textContent   = '時価総額: ' + formatMarketCap(nearest.marketCapB) +
+        ' | 子会社数: ' + nearest.subsidiaryCount;
       }
     } else {
       tooltip.style.display = 'none';
@@ -917,8 +915,8 @@ techio-code/capital-map-us
     const hData = instHolders[ticker];
     if (!hData || hData.holder_count === 0) {
     return '<div style="margin-top:10px;padding-top:8px;border-top:1px solid var(--border-dim)">' +
-      '<div style="font-family:var(--font-mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:5px">Top Institutional Holders (Q1 2026)</div>' +
-      '<div style="font-size:11px;color:var(--ink-4)">No institutional data available</div>' +
+      '<div style="font-family:var(--font-mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:5px">主要機関投資家（2026年Q1）</div>' +
+      '<div style="font-size:11px;color:var(--ink-4)">機関投資家データなし</div>' +
       '</div>';
     }
     const limit = isMobile ? 5 : 10;
@@ -932,11 +930,11 @@ techio-code/capital-map-us
     ).join('');
     const total = formatValueUSD(hData.total_institutional_value_usd || 0);
     return '<div style="margin-top:10px;padding-top:8px;border-top:1px solid var(--border-dim)">' +
-    '<div style="font-family:var(--font-mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:5px">Top Institutional Holders (Q1 2026)</div>' +
+    '<div style="font-family:var(--font-mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:5px">主要機関投資家（2026年Q1）</div>' +
     rows +
     '<div style="margin-top:4px;font-family:var(--font-mono);font-size:9px;color:var(--ink-3);display:flex;justify-content:space-between">' +
-    '<span>Total Inst. Value: <b style="color:var(--ink-1)">' + total + '</b></span>' +
-    '<span>' + hData.holder_count + ' holders</span>' +
+    '<span>機関投資家合計評価額: <b style="color:var(--ink-1)">' + total + '</b></span>' +
+    '<span>' + hData.holder_count + '機関</span>' +
     '</div>' +
     '</div>';
   }
@@ -953,32 +951,32 @@ techio-code/capital-map-us
     infoMeta.innerHTML =
       '<span class="info-sector-dot" style="background:' + sec.color + '"></span>' +
       sec.key + '<br>' +
-      'Subsidiaries: <b>' + n.subsidiaryCount + '</b><br>' +
-      'Market Cap: ' + (n.marketCapB ? formatMarketCap(n.marketCapB) : 'N/A') + '<br>' +
-      'Edges: ' + (n._adj ? n._adj.length : 0) +
+      '子会社数: <b>' + n.subsidiaryCount + '</b><br>' +
+      '時価総額: ' + (n.marketCapB ? formatMarketCap(n.marketCapB) : 'N/A') + '<br>' +
+      'エッジ数: ' + (n._adj ? n._adj.length : 0) +
       buildInstSection(n.ticker, isMobile);
     } else {
-    infoTicker.textContent = 'Subsidiary';
+    infoTicker.textContent = '完全子会社';
     infoName.textContent   = n.name;
     const pct = n._ownershipPct;
     let ownerInfo = '';
     if (pct !== null && pct !== undefined) {
       let badge, badgeColor;
-      if (pct >= 50)      { badge = 'subsidiary';        badgeColor = '#5A9E6F'; }
-      else if (pct >= 20) { badge = 'affiliate (equity method)'; badgeColor = '#E8834A'; }
-      else                { badge = 'minor stake';        badgeColor = '#787570'; }
+      if (pct >= 50)      { badge = '完全子会社';              badgeColor = '#5A9E6F'; }
+      else if (pct >= 20) { badge = '持分法適用関連会社';      badgeColor = '#E8834A'; }
+      else                { badge = '少額出資';                 badgeColor = '#787570'; }
       ownerInfo = '<span style="display:inline-block;font-size:9px;font-family:var(--font-mono);' +
       'background:' + badgeColor + '22;border:1px solid ' + badgeColor + '66;' +
       'border-radius:2px;padding:1px 5px;color:' + badgeColor + ';margin-left:4px">' +
       badge + '</span><br>' +
-      'Ownership: <b>' + pct + '%</b><br>';
+      '持株比率: <b>' + pct + '%</b><br>';
     }
     infoMeta.innerHTML =
       '<span class="info-sector-dot" style="background:' + sec.color + '"></span>' +
       sec.key + '<br>' +
       ownerInfo +
-      (n.jurisdiction ? 'Jurisdiction: ' + n.jurisdiction + '<br>' : '') +
-      'Edges: ' + (n._adj ? n._adj.length : 0);
+      (n.jurisdiction ? '設立地: ' + n.jurisdiction + '<br>' : '') +
+      'エッジ数: ' + (n._adj ? n._adj.length : 0);
     }
 
     animatePanTo(n.x, n.y, n.nodeType === 'parent' ? 1.5 : 2.5);
@@ -1281,16 +1279,16 @@ techio-code/capital-map-us
       '<div class="sector-card-header">' +
       '<div class="sector-card-dot" style="background:' + s.color + '"></div>' +
       '<span class="sector-card-name">' + s.key + '</span>' +
-      '<span class="sector-card-count">' + sParents.length + ' co.</span>' +
+      '<span class="sector-card-count">' + sParents.length + '社</span>' +
       '</div>' +
       '<div class="sector-card-stats">' +
-      '<div class="sector-stat"><span class="sector-stat-val">' + sParents.length + '</span><span class="sector-stat-label">Parents</span></div>' +
-      '<div class="sector-stat"><span class="sector-stat-val">' + totalSubs.toLocaleString() + '</span><span class="sector-stat-label">Subsidiaries</span></div>' +
-      '<div class="sector-stat"><span class="sector-stat-val">' + (sParents.length ? Math.round(totalSubs / sParents.length) : 0) + '</span><span class="sector-stat-label">Avg / Co.</span></div>' +
+      '<div class="sector-stat"><span class="sector-stat-val">' + sParents.length + '</span><span class="sector-stat-label">親会社数</span></div>' +
+      '<div class="sector-stat"><span class="sector-stat-val">' + totalSubs.toLocaleString() + '</span><span class="sector-stat-label">子会社数計</span></div>' +
+      '<div class="sector-stat"><span class="sector-stat-val">' + (sParents.length ? Math.round(totalSubs / sParents.length) : 0) + '</span><span class="sector-stat-label">平均/社</span></div>' +
       '</div>' +
-      '<div class="sector-top5-label">Top 5 by Subsidiary Count</div>' +
+      '<div class="sector-top5-label">子会社数 上位5社</div>' +
       top5Html +
-      '<div class="sector-hint">Click to highlight in Network</div>';
+      '<div class="sector-hint">クリックでネットワークをフィルタ</div>';
 
     card.addEventListener('click', () => {
 
@@ -1467,7 +1465,7 @@ techio-code/capital-map-us
 
     const maxPage = Math.ceil(total / TABLE_PAGE_SIZE) - 1;
     document.getElementById('table-count').textContent =
-    total + ' compan' + (total === 1 ? 'y' : 'ies');
+    total + '社';
     document.getElementById('pager-info').textContent =
     (start + 1) + '–' + end + ' / ' + total;
     document.getElementById('pager-prev').disabled = tablePage === 0;
@@ -1550,7 +1548,7 @@ techio-code/capital-map-us
     // Highlight button
     if (count > 0) {
     hlBtn.style.display = '';
-    hlBtn.textContent = highlightOn ? 'Highlight ON' : 'Highlight OFF';
+    hlBtn.textContent = highlightOn ? '強調表示 ON' : '強調表示 OFF';
     hlBtn.className = highlightOn ? 'on' : '';
     // id stays
     hlBtn.id = 'portfolio-highlight-btn';
@@ -1560,7 +1558,7 @@ techio-code/capital-map-us
     }
 
     // Open button text
-    openBtn.textContent = count > 0 ? 'Edit Portfolio' : '+ Portfolio';
+    openBtn.textContent = count > 0 ? 'ポートフォリオ編集' : '+ ポートフォリオ追加';
   }
 
   /* --- Highlight toggle --- */
@@ -1590,14 +1588,14 @@ techio-code/capital-map-us
     portfolioSet = parsed;
     savePortfolioToStorage();
     updatePortfolioUI();
-    pmStatus.textContent = parsed.size + ' ticker' + (parsed.size !== 1 ? 's' : '') + ' saved.';
+    pmStatus.textContent = parsed.size + '件のティッカーを保存しました。';
     setTimeout(() => { pmBg.classList.remove('open'); }, 800);
   });
 
   /* --- Sample --- */
   document.getElementById('pm-sample-btn').addEventListener('click', () => {
     pmTextarea.value = PORTFOLIO_SAMPLE.join('\n');
-    pmStatus.textContent = 'Sample loaded — click Save to apply.';
+    pmStatus.textContent = 'サンプルを読み込みました — 「保存」をクリックして適用してください。';
   });
 
   /* --- Clear --- */
@@ -1606,7 +1604,7 @@ techio-code/capital-map-us
     portfolioSet = new Set();
     savePortfolioToStorage();
     updatePortfolioUI();
-    pmStatus.textContent = 'Portfolio cleared.';
+    pmStatus.textContent = 'ポートフォリオをクリアしました。';
   });
 
   /* --- CSV file upload --- */
@@ -1631,7 +1629,7 @@ techio-code/capital-map-us
       }
     });
     pmTextarea.value = tickers.join('\n');
-    pmStatus.textContent = tickers.length + ' tickers extracted — click Save to apply.';
+    pmStatus.textContent = tickers.length + '件のティッカーを抽出しました — 「保存」をクリックして適用してください。';
     };
     reader.readAsText(file);
     this.value = '';
@@ -1658,15 +1656,15 @@ techio-code/capital-map-us
       const mark = document.createElement('span');
       mark.className = 'portfolio-mark';
       mark.style.cssText = 'display:block;margin-top:6px;color:#FFD700;font-family:var(--font-mono);font-size:10px;letter-spacing:0.08em;';
-      mark.textContent = 'IN PORTFOLIO';
+      mark.textContent = 'ポートフォリオ保有中';
       meta.appendChild(mark);
     }
     }
     // Also add to tooltip
     const ttTicker = document.getElementById('tt-ticker');
     if (ttTicker && isInPortfolio(n)) {
-    if (!ttTicker.textContent.includes('IN PORTFOLIO')) {
-      ttTicker.textContent += '  [IN PORTFOLIO]';
+    if (!ttTicker.textContent.includes('ポートフォリオ保有中')) {
+      ttTicker.textContent += '  [ポートフォリオ保有中]';
     }
     }
   };
@@ -1697,9 +1695,9 @@ techio-code/capital-map-us
     if (portfolioSet.size === 0) {
     el.innerHTML =
       '<div class="pv-empty">' +
-      '<div class="pv-empty-title">No portfolio loaded</div>' +
-      '<div class="pv-empty-desc">Click "+ Portfolio" in the header to import your holdings.</div>' +
-      '<button class="pv-empty-btn" id="pv-add-btn">+ Add Portfolio</button>' +
+      '<div class="pv-empty-title">ポートフォリオが未設定です</div>' +
+      '<div class="pv-empty-desc">ヘッダーの「+ ポートフォリオ追加」をクリックして保有銘柄を読み込んでください。</div>' +
+      '<button class="pv-empty-btn" id="pv-add-btn">+ ポートフォリオ追加</button>' +
       '</div>';
     document.getElementById('pv-add-btn').addEventListener('click', () => {
       pmTextarea.value = '';
@@ -1740,16 +1738,16 @@ techio-code/capital-map-us
     const statsDiv = document.createElement('div');
     statsDiv.className = 'pv-stats-row';
     statsDiv.innerHTML =
-    '<div class="pv-stat"><span class="pv-stat-val">' + matched.length + '</span><span class="pv-stat-label">Holdings (matched)</span></div>' +
-    '<div class="pv-stat"><span class="pv-stat-val">' + totalSubs.toLocaleString() + '</span><span class="pv-stat-label">Total Subsidiaries</span></div>' +
-    '<div class="pv-stat"><span class="pv-stat-val">' + sectorSet.size + '</span><span class="pv-stat-label">Sectors Covered</span></div>' +
-    (notFound.length ? '<div class="pv-stat"><span class="pv-stat-val" style="color:#E8834A">' + notFound.length + '</span><span class="pv-stat-label">Tickers Not Found</span></div>' : '');
+    '<div class="pv-stat"><span class="pv-stat-val">' + matched.length + '</span><span class="pv-stat-label">保有銘柄数（照合済）</span></div>' +
+    '<div class="pv-stat"><span class="pv-stat-val">' + totalSubs.toLocaleString() + '</span><span class="pv-stat-label">合計子会社数</span></div>' +
+    '<div class="pv-stat"><span class="pv-stat-val">' + sectorSet.size + '</span><span class="pv-stat-label">カバーセクター数</span></div>' +
+    (notFound.length ? '<div class="pv-stat"><span class="pv-stat-val" style="color:#E8834A">' + notFound.length + '</span><span class="pv-stat-label">未照合ティッカー</span></div>' : '');
     el.appendChild(statsDiv);
 
     // --- Sector distribution ---
     const secSection = document.createElement('div');
     secSection.className = 'pv-section';
-    secSection.innerHTML = '<div class="pv-section-title">Sector Distribution</div>';
+    secSection.innerHTML = '<div class="pv-section-title">セクター分布</div>';
 
     const secCounts = {};
     matched.forEach(n => {
@@ -1777,7 +1775,7 @@ techio-code/capital-map-us
     const holdSection = document.createElement('div');
     holdSection.className = 'pv-section';
     holdSection.innerHTML =
-    '<div class="pv-section-title">Holdings (' + matched.length + ')</div>';
+    '<div class="pv-section-title">保有銘柄（' + matched.length + '件）</div>';
     const sortedMatched = [...matched].sort((a, b) => b.subsidiaryCount - a.subsidiaryCount);
     sortedMatched.forEach(n => {
     const sec = SECTORS[n.sector];
@@ -1788,7 +1786,7 @@ techio-code/capital-map-us
       '<span class="pv-holding-ticker">' + escHtml(n.ticker || '') + '</span>' +
       '<span class="pv-holding-name">' + escHtml(n.name) + '</span>' +
       '<span class="pv-holding-sector">' + sec.short + '</span>' +
-      '<span class="pv-holding-subs">' + n.subsidiaryCount + ' subs</span>';
+      '<span class="pv-holding-subs">' + n.subsidiaryCount + '社</span>';
     row.addEventListener('click', () => {
       switchTab('graph');
       setTimeout(() => { selectNode(n); }, 120);
@@ -1799,7 +1797,7 @@ techio-code/capital-map-us
     if (notFound.length) {
     const nfDiv = document.createElement('div');
     nfDiv.style.cssText = 'margin-top:8px;font-family:var(--font-mono);font-size:11px;color:var(--ink-4);';
-    nfDiv.textContent = 'Not in dataset: ' + notFound.join(', ');
+    nfDiv.textContent = 'データセット未収録: ' + notFound.join(', ');
     holdSection.appendChild(nfDiv);
     }
     el.appendChild(holdSection);
@@ -1807,7 +1805,7 @@ techio-code/capital-map-us
     // --- Top subsidiaries ---
     const topSubSection = document.createElement('div');
     topSubSection.className = 'pv-section';
-    topSubSection.innerHTML = '<div class="pv-section-title">Top Holdings by Subsidiary Count</div>';
+    topSubSection.innerHTML = '<div class="pv-section-title">保有銘柄の主要子会社</div>';
     const topSubs = sortedMatched.slice(0, 10);
     topSubs.forEach((n, i) => {
     const row = document.createElement('div');
@@ -1816,7 +1814,7 @@ techio-code/capital-map-us
     row.innerHTML =
       '<span class="pv-topsub-rank">' + (i + 1) + '</span>' +
       '<span class="pv-topsub-parent">' + escHtml(n.ticker || '') + '</span>' +
-      '<span class="pv-topsub-name">' + (examples ? escHtml(examples) : '<em style="color:var(--ink-4)">No subsidiary names available</em>') + '</span>' +
+      '<span class="pv-topsub-name">' + (examples ? escHtml(examples) : '<em style="color:var(--ink-4)">子会社名データなし</em>') + '</span>' +
       '<span class="pv-topsub-subs">' + n.subsidiaryCount + '</span>';
     topSubSection.appendChild(row);
     });
@@ -1825,7 +1823,7 @@ techio-code/capital-map-us
     // --- Overlap / duplicate risk warnings ---
     const warnSection = document.createElement('div');
     warnSection.className = 'pv-section';
-    warnSection.innerHTML = '<div class="pv-section-title">Overlap Risk</div>';
+    warnSection.innerHTML = '<div class="pv-section-title">セクター集中リスク警告</div>';
 
     // Check: any holding with very high sub count in same sector as another holding
     const sectorOverlap = {};
@@ -1841,17 +1839,17 @@ techio-code/capital-map-us
       const card = document.createElement('div');
       card.className = 'pv-warn-card';
       card.innerHTML =
-      '<div class="pv-warn-title">Sector Concentration: ' + escHtml(s.key) + '</div>' +
-      '<div class="pv-warn-desc">' + ns.length + ' holdings in the same GICS sector (' +
+      '<div class="pv-warn-title">セクター集中: ' + escHtml(s.key) + '</div>' +
+      '<div class="pv-warn-desc">' + ns.length + '銘柄が同一GICSセクターに集中しています（' +
       ns.map(n => escHtml(n.ticker)).join(', ') +
-      '). Consider diversifying across sectors.</div>';
+      '）。セクター分散を検討してください。</div>';
       warnSection.appendChild(card);
     }
     });
     if (warnCount === 0) {
     const ok = document.createElement('div');
     ok.style.cssText = 'font-size:12px;color:var(--ink-3);padding:8px 0;';
-    ok.textContent = 'No major concentration warnings. Sectors look well-distributed.';
+    ok.textContent = '集中リスクなし。セクター分散は良好です。';
     warnSection.appendChild(ok);
     }
     el.appendChild(warnSection);
@@ -1859,7 +1857,7 @@ techio-code/capital-map-us
     // --- Uncovered sectors & suggestions ---
     const sugSection = document.createElement('div');
     sugSection.className = 'pv-section';
-    sugSection.innerHTML = '<div class="pv-section-title">Uncovered Sectors — Top Suggestion</div>';
+    sugSection.innerHTML = '<div class="pv-section-title">未保有セクターの代表企業</div>';
 
     const coveredSectors = new Set(Object.keys(secCounts).map(Number));
     let sugCount = 0;
@@ -1889,7 +1887,7 @@ techio-code/capital-map-us
     if (sugCount === 0) {
     const ok = document.createElement('div');
     ok.style.cssText = 'font-size:12px;color:var(--ink-3);padding:8px 0;';
-    ok.textContent = 'All 11 GICS sectors are represented in your portfolio.';
+    ok.textContent = '11 GICSセクター全てをカバーしています。';
     sugSection.appendChild(ok);
     }
     el.appendChild(sugSection);
@@ -1898,7 +1896,7 @@ techio-code/capital-map-us
     if (instHolders && Object.keys(instHolders).length > 0) {
     const instSection = document.createElement('div');
     instSection.className = 'pv-section';
-    instSection.innerHTML = '<div class="pv-section-title">Institutional Backing (Q1 2026)</div>';
+    instSection.innerHTML = '<div class="pv-section-title">機関投資家による支え（2026年Q1）</div>';
 
     /* per-holding top1 and aggregate */
     let grandTotal = 0;
@@ -1925,7 +1923,7 @@ techio-code/capital-map-us
       } else {
       row.innerHTML =
         '<span style="font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--gold);width:56px;flex-shrink:0">' + escHtml(tk) + '</span>' +
-        '<span style="flex:1;color:var(--ink-4);font-size:11px">No institutional data</span>';
+        '<span style="flex:1;color:var(--ink-4);font-size:11px">機関投資家データなし</span>';
       }
       instSection.appendChild(row);
     });
@@ -1934,7 +1932,7 @@ techio-code/capital-map-us
     const totRow = document.createElement('div');
     totRow.style.cssText = 'margin-top:8px;font-family:var(--font-mono);font-size:11px;color:var(--ink-3);display:flex;justify-content:space-between;';
     totRow.innerHTML =
-      '<span>Combined Inst. Value (portfolio)</span>' +
+      '<span>機関投資家合計評価額（ポートフォリオ計）</span>' +
       '<span style="color:var(--ink-1);font-weight:700">' + formatValueUSD(grandTotal) + '</span>';
     instSection.appendChild(totRow);
 
@@ -1947,9 +1945,9 @@ techio-code/capital-map-us
       concentratedHolders.forEach(([hName, tks]) => {
       const inner = document.createElement('div');
       inner.innerHTML =
-        '<div class="pv-warn-title">Institutional Concentration: ' + escHtml(hName) + '</div>' +
-        '<div class="pv-warn-desc">' + hName + ' is the #1 holder in ' + tks.length + ' of your positions (' +
-        tks.map(t => escHtml(t)).join(', ') + '). A sell-off by this institution could impact multiple holdings simultaneously.</div>';
+        '<div class="pv-warn-title">機関投資家集中: ' + escHtml(hName) + '</div>' +
+        '<div class="pv-warn-desc">' + escHtml(hName) + ' があなたのポジション ' + tks.length + ' 銘柄で第1位の機関投資家です（' +
+        tks.map(t => escHtml(t)).join(', ') + '）。この機関の売り圧力が複数銘柄に同時に影響する可能性があります。</div>';
       wCard.appendChild(inner);
       });
       instSection.appendChild(wCard);
@@ -1961,7 +1959,7 @@ techio-code/capital-map-us
     /* --- Ownership Structure section --- */
     const ownSection = document.createElement('div');
     ownSection.className = 'pv-section';
-    ownSection.innerHTML = '<div class="pv-section-title">Ownership Structure (Subsidiary Stake Distribution)</div>';
+    ownSection.innerHTML = '<div class="pv-section-title">持株構造（子会社持分分布）</div>';
 
     /* count edges for portfolio holdings by pct bucket */
     const buckets = { full: 0, majority: 0, affiliate: 0, minor: 0, unknown: 0 };
@@ -1979,11 +1977,11 @@ techio-code/capital-map-us
     });
 
     const bucketDefs = [
-    { key: 'full',     label: '100% — Full Control',          color: '#5A9E6F' },
-    { key: 'majority', label: '50–99% — Majority',            color: '#5B9BD5' },
-    { key: 'affiliate',label: '20–49% — Affiliate (equity)',  color: '#E8834A' },
-    { key: 'minor',    label: '<20% — Minor Stake',           color: '#787570' },
-    { key: 'unknown',  label: 'Not disclosed',                 color: '#484540' },
+    { key: 'full',     label: '完全支配（100%）',              color: '#5A9E6F' },
+    { key: 'majority', label: '過半数支配（50-99%）',          color: '#5B9BD5' },
+    { key: 'affiliate',label: '持分法適用（20-49%）',          color: '#E8834A' },
+    { key: 'minor',    label: '少額出資（20%未満）',           color: '#787570' },
+    { key: 'unknown',  label: '不明',                          color: '#484540' },
     ];
     const maxBucket = Math.max(...Object.values(buckets), 1);
     bucketDefs.forEach(bd => {
@@ -2005,7 +2003,7 @@ techio-code/capital-map-us
     resizeCanvas();
     window.addEventListener('resize', () => { resizeCanvas(); centerTransform(); });
 
-    setLoading(5, 'Loading data...');
+    setLoading(5, 'データ読み込み中…');
     await nextFrame();
 
     const { nodes: loaded, edges: loadedEdges, isDummy } = await loadData();
@@ -2022,7 +2020,7 @@ techio-code/capital-map-us
     parentNodes = nodes.filter(n => n.nodeType === 'parent' || n.nodeType === undefined);
     subNodes  = nodes.filter(n => n.nodeType === 'subsidiary');
 
-    setLoading(25, 'Computing node sizes...');
+    setLoading(25, 'ノードサイズ計算中…');
     await nextFrame();
 
     const _parents = nodes.filter(n => n.nodeType === 'parent');
@@ -2036,13 +2034,13 @@ techio-code/capital-map-us
     }
     });
 
-    setLoading(40, 'Building adjacency map...');
+    setLoading(40, '隣接マップ構築中…');
     await nextFrame();
 
     const adj = buildAdjacency(edges, nodes.length);
     nodes.forEach(n => { n._adj = adj[n.id]; });
 
-    setLoading(55, 'Setting initial positions...');
+    setLoading(55, '初期配置を設定中…');
     await nextFrame();
 
     centerTransform();
@@ -2070,7 +2068,7 @@ techio-code/capital-map-us
     n.y = base.y + Math.sin(angle) * dist;
     });
 
-    setLoading(68, 'Starting D3 force simulation...');
+    setLoading(68, 'D3力学シミュレーション開始中…');
     await nextFrame();
 
     simulation = d3.forceSimulation(nodes)
@@ -2101,7 +2099,7 @@ techio-code/capital-map-us
     .velocityDecay(0.45)
     .on('tick', () => {});
 
-    setLoading(82, 'Building UI...');
+    setLoading(82, 'UI構築中…');
     await nextFrame();
 
     const sectorStats = calcSectorStats(parentNodes);
@@ -2114,8 +2112,8 @@ techio-code/capital-map-us
 
     statNodes.textContent  = parentCount.toLocaleString();
     statNodesSub.textContent = isDummy
-    ? 'Nodes — Dummy data'
-    : parentCount + ' parents + ' + subCount.toLocaleString() + ' subsidiaries';
+    ? 'ノード — ダミーデータ'
+    : parentCount + '社（親会社のみ）+ ' + subCount.toLocaleString() + ' 子会社';
     statEdges.textContent  = ec.toLocaleString();
     hudNodes.textContent   = nc.toLocaleString();
     hudEdges.textContent   = ec.toLocaleString();
@@ -2124,18 +2122,18 @@ techio-code/capital-map-us
     if (isDummy) {
     hudMode.textContent  = 'DUMMY';
     hudMode.style.color  = '#E8834A';
-    dataBadgeLabel.textContent = 'DUMMY — Exhibit 21 pending';
+    dataBadgeLabel.textContent = 'DUMMY — Exhibit 21 未取得';
     } else {
     hudMode.textContent  = 'LIVE v0.7';
     hudMode.style.color  = '#5A9E6F';
-    dataBadgeLabel.textContent = 'SEC Exhibit 21 + 13F — ' + ec.toLocaleString() + ' edges';
+    dataBadgeLabel.textContent = 'SEC Exhibit 21 + 13F — ' + ec.toLocaleString() + ' エッジ';
     }
 
     if (isMobile) {
     const hudMobileRow = document.getElementById('hud-mobile-row');
     const hudMobileVal = document.getElementById('hud-mobile-val');
     if (hudMobileRow) hudMobileRow.style.display = 'flex';
-    if (hudMobileVal) hudMobileVal.textContent = nc + ' parents only';
+    if (hudMobileVal) hudMobileVal.textContent = nc + '社（親会社のみ）';
     }
 
     canvas.addEventListener('mousedown', handleMouseDown, { passive: true });
@@ -2147,7 +2145,7 @@ techio-code/capital-map-us
     canvas.addEventListener('touchmove',   handleTouchMove,  { passive: false });
     canvas.addEventListener('touchend',  () => { isDragging = false; lastTouchDist = 0; });
 
-    setLoading(100, 'Ready.');
+    setLoading(100, '準備完了');
     await nextFrame();
 
     loading.classList.add('hidden');
@@ -2310,13 +2308,13 @@ techio-code/capital-map-us
     instHolders=null;
     assert('buildInstSection: null=empty', buildInstSection('AAPL',false)==='');
     instHolders={};
-    assert('buildInstSection: no-data msg', buildInstSection('AAPL',false).includes('No institutional data available'));
+    assert('buildInstSection: no-data msg', buildInstSection('AAPL',false).includes('機関投資家データなし'));
     instHolders={'MOCK':{holder_count:2,total_institutional_value_usd:1.5e12,top_holders:[{name:'Vanguard Group',value_usd:9e11},{name:'BlackRock Inc',value_usd:6e11}]}};
     const _mh=buildInstSection('MOCK',false);
     assert('buildInstSection: holder name',  _mh.includes('Vanguard Group'));
     assert('buildInstSection: B value',      _mh.includes('$900.0B')||_mh.includes('$0.9T'));
     assert('buildInstSection: total T',      _mh.includes('$1.5T'));
-    assert('buildInstSection: holder count', _mh.includes('2 holders'));
+    assert('buildInstSection: holder count', _mh.includes('2機関'));
     assert('buildInstSection: mobile ok',    buildInstSection('MOCK',true).includes('Vanguard Group'));
     instHolders=_si;
     /* v0.7: edge width/dash logic */
@@ -2353,7 +2351,7 @@ techio-code/capital-map-us
   }
 
   init().catch(err => {
-    loadingStatus.textContent = 'Error: ' + err.message;
+    loadingStatus.textContent = 'エラー: ' + err.message;
   });
 
   })();
